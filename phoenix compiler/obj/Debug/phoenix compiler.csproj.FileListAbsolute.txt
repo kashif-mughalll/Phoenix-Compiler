@@ -1,0 +1,11 @@
+D:\C# Projects\phoenix compiler\phoenix compiler\bin\Debug\phoenix compiler.exe.config
+D:\C# Projects\phoenix compiler\phoenix compiler\bin\Debug\phoenix compiler.exe
+D:\C# Projects\phoenix compiler\phoenix compiler\bin\Debug\phoenix compiler.pdb
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix compiler.csprojResolveAssemblyReference.cache
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix_compiler.Properties.Resources.resources
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix compiler.csproj.GenerateResource.Cache
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix compiler.exe
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix compiler.pdb
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\phoenix_compiler.TokenSetForm.resources
+D:\C# Projects\phoenix compiler\phoenix compiler\bin\Debug\ICSharpCode.TextEditor.dll
+D:\C# Projects\phoenix compiler\phoenix compiler\obj\Debug\Compiler_Pheonix.MainForm.resources
