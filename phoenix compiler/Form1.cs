@@ -16,19 +16,16 @@ namespace Compiler_Pheonix
 {
     public partial class MainForm : Form
     {
+        
         private TokenSetForm tokenSetForm;
         List<Token> tokenList = new List<Token>();
+        private SettingsForm settings;
 
         public MainForm()
         {
             InitializeComponent();
-            this.KeyDown += MainForm_KeyDown;
         }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -128,6 +125,9 @@ namespace Compiler_Pheonix
             viewTokenSet.Enabled = false;
         }
 
-        
+        private void settingsBTN_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().Show();
+        }
     }
 }

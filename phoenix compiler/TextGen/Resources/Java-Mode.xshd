@@ -30,7 +30,7 @@
 		
 			<MarkPrevious bold = "true" italic = "false" color = "MidnightBlue">(</MarkPrevious>
 		
-			<KeyWords name = "Punctuation" bold = "false" italic = "false" color = "DarkGreen">
+			<KeyWords name = "Punctuation" bold = "false" italic = "false" color = "Purple">
 				<Key word = "?" />
 				<Key word = "," />
 				<Key word = "." />

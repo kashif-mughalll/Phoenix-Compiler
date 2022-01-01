@@ -39,6 +39,7 @@ namespace Compiler_Pheonix
             this.CodeArea = new ICSharpCode.TextEditor.TextEditorControl();
             this.debugWindow = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.settingsBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // RunBtn
@@ -123,7 +124,7 @@ namespace Compiler_Pheonix
             this.debugWindow.ReadOnly = true;
             this.debugWindow.Size = new System.Drawing.Size(814, 110);
             this.debugWindow.TabIndex = 0;
-            this.debugWindow.Text = "";            
+            this.debugWindow.Text = "";
             // 
             // label2
             // 
@@ -136,12 +137,24 @@ namespace Compiler_Pheonix
             this.label2.TabIndex = 10;
             this.label2.Text = resources.GetString("label2.Text");
             // 
+            // settingsBTN
+            // 
+            this.settingsBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsBTN.Location = new System.Drawing.Point(683, 551);
+            this.settingsBTN.Name = "settingsBTN";
+            this.settingsBTN.Size = new System.Drawing.Size(87, 23);
+            this.settingsBTN.TabIndex = 11;
+            this.settingsBTN.Text = "Settings";
+            this.settingsBTN.UseVisualStyleBackColor = true;
+            this.settingsBTN.Click += new System.EventHandler(this.settingsBTN_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(779, 578);
+            this.Controls.Add(this.settingsBTN);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.debugWindow);
             this.Controls.Add(this.CodeArea);
@@ -169,6 +182,7 @@ namespace Compiler_Pheonix
         private ICSharpCode.TextEditor.TextEditorControl CodeArea;
         private System.Windows.Forms.RichTextBox debugWindow;
         private System.Windows.Forms.Label label2;
+        public Button settingsBTN;
     }
 }
 

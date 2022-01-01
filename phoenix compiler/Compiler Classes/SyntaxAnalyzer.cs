@@ -2364,7 +2364,7 @@ namespace phoenix_compiler
             log.CheckTerminal("Checking for Identifier   result = " + (getToken().ClassName.Equals("Identifier")).ToString(), i);
             if (getToken().ClassName.Equals("Identifier"))
             {
-                log.AddLOG("ID", false, getToken());
+                log.AddLOG("ID : "+ getToken().Value, false, getToken());
                 i++;
                 return true;
             }

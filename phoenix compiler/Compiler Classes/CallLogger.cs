@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Compiler_Pheonix;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace phoenix_compiler
 
         public void StopSerialFile()
         {
-            //StopSerial = true;
+            if(Utility.StopAtFalse) StopSerial = true;
         }
 
 
