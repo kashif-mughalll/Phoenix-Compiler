@@ -12,6 +12,7 @@ namespace Compiler_Pheonix
     static public class Utility
     {
         public static bool StopAtFalse = false;
+        public static bool ThrowSyntaxError = true;
 
         static public readonly string serialFilePath = Directory.GetCurrentDirectory() + @"\serialFile.txt";
         static public readonly string logFilePath = Directory.GetCurrentDirectory() + @"\LogFile.txt";

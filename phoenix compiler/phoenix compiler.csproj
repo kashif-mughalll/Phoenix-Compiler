@@ -60,6 +60,7 @@
     <Compile Include="Compiler Classes\Punctuators.cs" />
     <Compile Include="Compiler Classes\SelectionSets.cs" />
     <Compile Include="Compiler Classes\SyntaxAnalyzer.cs" />
+    <Compile Include="Compiler Classes\SyntaxMessage.cs" />
     <Compile Include="Compiler Classes\TextGen.cs" />
     <Compile Include="Compiler Classes\Utility.cs" />
     <Compile Include="Form1.cs">

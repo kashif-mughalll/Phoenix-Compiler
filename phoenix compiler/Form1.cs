@@ -24,12 +24,28 @@ namespace Compiler_Pheonix
         public MainForm()
         {
             InitializeComponent();
+            this.KeyPreview = true;
         }
         
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            TextGen.Init(CodeArea);            
+            TextGen.Init(CodeArea);
+            this.KeyDown += MainForm_KeyDown;               
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs k)
+        {
+            // ShortCuts work here .....
+
+            if((k.Control && k.KeyCode == Keys.F5) || k.KeyCode == Keys.F5)
+                if(RunBtn.Enabled) RunBtn_Click(null, null);
+
+            if ((k.Control && k.KeyCode == Keys.T)) viewSyntaxTreeBtn_Click(null, null);
+
+            if ((k.Control && k.KeyCode == Keys.F)) viewTokenSet_Click(null, null);
+
+            if ((k.Control && k.KeyCode == Keys.Q)) settingsBTN_Click(null, null); 
         }
 
         private void RunBtn_Click(object sender, EventArgs e)
@@ -64,6 +80,11 @@ namespace Compiler_Pheonix
             catch (ArgumentOutOfRangeException E)
             {
                 AppendText(debugWindow, "[Internal Error] Argument out of bound internal error.\n"+E.ToString()+"\n", Color.Red);
+                return;
+            }
+            catch (SyntaxError E)
+            {
+                AppendText(debugWindow, "[Syntax Error] syntax error at un specified line number : " + E.line + "  At Non-Terminal : "+E.NonTerminalName+"\n", Color.Red);
                 return;
             }
 
@@ -115,6 +136,7 @@ namespace Compiler_Pheonix
         private void button2_Click(object sender, EventArgs e)
         {
             CodeArea.Text = "";
+            CodeArea.Refresh();
         }
 
 

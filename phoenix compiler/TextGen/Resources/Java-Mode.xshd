@@ -98,7 +98,6 @@
 		
 			<KeyWords name = "Void" bold="false" italic="false" color="DarkRed">
 				<Key word = "void" />
-        <Key word = "from" />
 			</KeyWords>
 		
 			
@@ -116,6 +115,7 @@
 		
 			<KeyWords name = "NameSpaces" bold="false" italic="false" color="DarkGreen">
 				<Key word = "import" />
+        <Key word = "from" />
 			</KeyWords>
 		
 			<KeyWords name = "Literals" bold="false" italic="false" color="Blue">
@@ -127,8 +127,7 @@
 			<Delimiters>~!%^*()-+=|\#/{}[]:;"'&lt;&gt; , .?</Delimiters>
 			<KeyWords name = "Todoword" bold="false" italic="true" color="Red">
 				<Key word = "TODO" />
-			</KeyWords>
-			
+			</KeyWords>		
 			
 			
 		</RuleSet>

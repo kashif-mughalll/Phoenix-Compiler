@@ -8,6 +8,7 @@ var parentList = [];
 var parentCount = 0;
 let first = true;
 let AllowTokenSet = true;
+let AllowTokenSetView = false;
 
 
 var tree_structure = {
@@ -177,25 +178,25 @@ document.getElementById('toggleTokenSetBtn').addEventListener('click', (e) => {
   let select3 = Array.from(document.querySelectorAll('.node-tokenSet3'));
   
   select1.forEach(e => {
-    if (AllowTokenSet) e.style.display = 'none';
+    if (AllowTokenSetView) e.style.display = 'none';
     else e.style.display = 'block'
   });  
 
   select2.forEach(e => {
-    if (AllowTokenSet) e.style.display = 'none';
+    if (AllowTokenSetView) e.style.display = 'none';
     else e.style.display = 'block'
   });  
 
   select3.forEach(e => {
-    if (AllowTokenSet) e.style.display = 'none';
+    if (AllowTokenSetView) e.style.display = 'none';
     else e.style.display = 'block'
   });  
 
-  if (AllowTokenSet) {
-    AllowTokenSet = false;
+  if (AllowTokenSetView) {
+    AllowTokenSetView = false;
 
   } else {
-    AllowTokenSet = true;
+    AllowTokenSetView = true;
   }
 })
 

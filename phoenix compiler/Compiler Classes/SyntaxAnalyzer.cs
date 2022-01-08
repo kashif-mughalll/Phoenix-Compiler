@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Compiler_Pheonix;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -2282,6 +2283,7 @@ namespace phoenix_compiler
             log.ChainBreak(name, tokenList[i], i);
             log.AddLOG("False", false, getToken());
             log.StopSerialFile();
+            if (Utility.ThrowSyntaxError) throw new SyntaxError(getToken().LineNumber,getToken(),name);
             return false;
         }
 
@@ -2364,7 +2366,7 @@ namespace phoenix_compiler
             log.CheckTerminal("Checking for Identifier   result = " + (getToken().ClassName.Equals("Identifier")).ToString(), i);
             if (getToken().ClassName.Equals("Identifier"))
             {
-                log.AddLOG("ID : "+ getToken().Value, false, getToken());
+                log.AddLOG("ID => "+ getToken().Value, false, getToken());
                 i++;
                 return true;
             }

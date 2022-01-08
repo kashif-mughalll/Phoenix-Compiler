@@ -17,12 +17,23 @@ namespace phoenix_compiler
         {
             InitializeComponent();
             StopSyntaxTreeAtFalse.Checked = Utility.StopAtFalse;
+            ThrowSyntaxError.Checked = Utility.ThrowSyntaxError;
         }
         
 
         private void StopSyntaxTreeAtFalse_CheckedChanged(object sender, EventArgs e)
         {
             Utility.StopAtFalse = StopSyntaxTreeAtFalse.Checked;
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ThrowSyntaxError_CheckedChanged(object sender, EventArgs e)
+        {
+            Utility.ThrowSyntaxError = ThrowSyntaxError.Checked;
         }
     }
 }
