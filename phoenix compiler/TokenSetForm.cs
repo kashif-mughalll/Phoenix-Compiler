@@ -54,12 +54,18 @@ namespace Compiler_Pheonix
             tokenSetArea.Text = "";
             foreach (string line in DATA.Split('\n'))
             {
-                if ( line.Length < 3 ) continue;
+                if ( line.Length < 2 ) continue;
                 string[] tokens = line.Split(':');
-                string append = tokens[0] + "\t : \t  " +tokens[1];
-                string[] furtherTokens = tokens[2].Split('%');
-                append += "     \t\t\t " + furtherTokens[0] + "   " + furtherTokens[1] + "   " + furtherTokens[2] + "\n";
-                tokenSetArea.Text += append;
+                if (tokens.Length > 2)
+                {
+                    string append = tokens[0] + "\t : \t  " + tokens[1];
+                    string[] furtherTokens = tokens[2].Split('%');
+                    if (furtherTokens.Length >= 3)
+                    {
+                        append += "     \t\t\t " + furtherTokens[0] + "   " + furtherTokens[1] + "   " + furtherTokens[2] + "\n";
+                        tokenSetArea.Text += append;
+                    }
+                }
             }
         }
 

@@ -105,7 +105,7 @@ body {
   position: absolute;
   width: 88px;
   left: -50%;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 .evolution-tree .node-False {
@@ -115,7 +115,7 @@ body {
   width: 88px;
   left: -50%;
   font-weight: bold;
-  font-size: 11px !important;
+  font-size: 14px !important;
 }
 
 .evolution-tree .node-tokenSet1 {

@@ -42,7 +42,11 @@ namespace phoenix_compiler
         {
             if (StopSerial) return;
             string _append = "";
-            if (B)
+            if (data.Equals("__backTrackTree__#"))
+            {
+                _append += "Back-Track : " + "\n";
+            }
+            else if (B)
             {
                 _append += "Non-Terminal : " + data + ":" + T.GenerateStr() + "\n";
             }

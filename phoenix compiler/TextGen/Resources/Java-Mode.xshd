@@ -97,7 +97,7 @@
 			</KeyWords>
 		
 			<KeyWords name = "Void" bold="false" italic="false" color="DarkRed">
-				<Key word = "void" />
+				<Key word = "empty" />
 			</KeyWords>
 		
 			

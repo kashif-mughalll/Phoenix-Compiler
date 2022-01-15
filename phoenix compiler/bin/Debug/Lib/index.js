@@ -17,12 +17,12 @@ var tree_structure = {
     //%%%%%%%%%%%%% CONFIGURATIONS %%%%%%%%%%%%%%%
 
     container: '#chart-cont',
-    levelSeparation: 60,
+    levelSeparation: 80,
     siblingSeparation: 170,
-    subTeeSeparation: 100,
+    subTeeSeparation: 140,
     nodeAlign: 'BOTTOM',
     scrollbar: 'fancy',
-    padding: 65,
+    padding: 75,
     node: { HTMLclass: 'evolution-tree' },
     connectors: {
       type: 'step',
@@ -105,6 +105,13 @@ function GenerateTreeStructure() {
           setParent();
         }
       }
+    }
+    else {
+      // back track
+      if(tokens[0].trim() != 'Back-Track') alert("problem");
+      parentCount--;
+      parentList.pop()
+      setParent();
     }
   }
 }

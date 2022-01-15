@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.SyntaxErrorHints = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +61,6 @@
             this.SelectionSetEnable.AutoSize = true;
             this.SelectionSetEnable.Checked = true;
             this.SelectionSetEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.SelectionSetEnable.Enabled = false;
             this.SelectionSetEnable.ForeColor = System.Drawing.Color.SlateGray;
             this.SelectionSetEnable.Location = new System.Drawing.Point(20, 45);
             this.SelectionSetEnable.Name = "SelectionSetEnable";
@@ -68,6 +68,7 @@
             this.SelectionSetEnable.TabIndex = 1;
             this.SelectionSetEnable.Text = "Selection Set Enable";
             this.SelectionSetEnable.UseVisualStyleBackColor = true;
+            this.SelectionSetEnable.CheckedChanged += new System.EventHandler(this.SelectionSetEnable_CheckedChanged);
             // 
             // StopSyntaxTreeAtFalse
             // 
@@ -116,6 +117,7 @@
             this.checkBox4.TabIndex = 4;
             this.checkBox4.Text = "Sementic analysis";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -200,11 +202,28 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Settings  :          Ctrl + Q";
             // 
+            // SyntaxErrorHints
+            // 
+            this.SyntaxErrorHints.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.SyntaxErrorHints.AutoSize = true;
+            this.SyntaxErrorHints.Checked = true;
+            this.SyntaxErrorHints.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SyntaxErrorHints.ForeColor = System.Drawing.Color.SlateGray;
+            this.SyntaxErrorHints.Location = new System.Drawing.Point(231, 95);
+            this.SyntaxErrorHints.Name = "SyntaxErrorHints";
+            this.SyntaxErrorHints.Size = new System.Drawing.Size(110, 17);
+            this.SyntaxErrorHints.TabIndex = 12;
+            this.SyntaxErrorHints.Text = "Syntax Error Hints";
+            this.SyntaxErrorHints.UseVisualStyleBackColor = true;
+            this.SyntaxErrorHints.CheckedChanged += new System.EventHandler(this.SyntaxErrorHints_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(407, 259);
+            this.Controls.Add(this.SyntaxErrorHints);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -221,7 +240,6 @@
             this.MaximumSize = new System.Drawing.Size(423, 298);
             this.Name = "SettingsForm";
             this.Text = "SettingsForm";
-            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +259,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox SyntaxErrorHints;
     }
 }

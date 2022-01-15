@@ -59,6 +59,7 @@
     <Compile Include="Compiler Classes\Operators.cs" />
     <Compile Include="Compiler Classes\Punctuators.cs" />
     <Compile Include="Compiler Classes\SelectionSets.cs" />
+    <Compile Include="Compiler Classes\Syn.cs" />
     <Compile Include="Compiler Classes\SyntaxAnalyzer.cs" />
     <Compile Include="Compiler Classes\SyntaxMessage.cs" />
     <Compile Include="Compiler Classes\TextGen.cs" />

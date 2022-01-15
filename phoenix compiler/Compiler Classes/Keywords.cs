@@ -30,7 +30,7 @@ namespace phoenix_compiler
         static private List<KeywordType> KeywordsGroups = new List<KeywordType>();
         static private string SourceData = @"
             DT:str,char,int,dbl,long,bool
-            void:void
+            void:empty
             datetime:dt
             if:whether
             else:or

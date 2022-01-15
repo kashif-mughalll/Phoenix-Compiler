@@ -18,6 +18,9 @@ namespace phoenix_compiler
             InitializeComponent();
             StopSyntaxTreeAtFalse.Checked = Utility.StopAtFalse;
             ThrowSyntaxError.Checked = Utility.ThrowSyntaxError;
+            SelectionSetEnable.Checked = Utility.EnableSS;
+            SyntaxErrorHints.Checked = Utility.SyntaxHints;
+            checkBox4.Checked = Utility.EnableSemanticAnalysis;
         }
         
 
@@ -26,14 +29,25 @@ namespace phoenix_compiler
             Utility.StopAtFalse = StopSyntaxTreeAtFalse.Checked;
         }
 
-        private void SettingsForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void ThrowSyntaxError_CheckedChanged(object sender, EventArgs e)
         {
             Utility.ThrowSyntaxError = ThrowSyntaxError.Checked;
+        }
+
+        private void SelectionSetEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            Utility.EnableSS = SelectionSetEnable.Checked;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            Utility.EnableSemanticAnalysis = checkBox4.Checked;
+        }
+
+        private void SyntaxErrorHints_CheckedChanged(object sender, EventArgs e)
+        {
+            Utility.SyntaxHints = SyntaxErrorHints.Checked;
         }
     }
 }

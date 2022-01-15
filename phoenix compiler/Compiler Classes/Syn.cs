@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace phoenix_compiler
 {
-    static class SyntaxAnalyzer
+    static class SyntaxAnalyzer1
     {
         private static CallLogger log;
         private static List<Token> tokenList;
@@ -33,7 +33,7 @@ namespace phoenix_compiler
                     if (start()) return true;
             }
             else if (Start_Global()) return true;
-            
+
             return ReturnFalse("start");
         }
 
@@ -43,11 +43,11 @@ namespace phoenix_compiler
             return false;
         }
 
-        
+
         private static bool Start_Global()
         {
             log.AddLog("Start_Global", getToken());
-            
+
             if (endMarker())
             {
                 return true;
@@ -66,43 +66,43 @@ namespace phoenix_compiler
 
             if (while_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Do_While())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (If_Else())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Ret_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Export_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (getToken().Value.Equals("break"))
             {
-                if(TokenIs("break"))
+                if (TokenIs("break"))
                     if (TokenIs(";"))
-                        return ReturnTrue();
+                        return true;
             }
             else if (getToken().Value.Equals("continue"))
             {
-                if(TokenIs("continue"))
+                if (TokenIs("continue"))
                     if (TokenIs(";"))
-                        return ReturnTrue();
+                        return true;
             }
             else if (Inc_Dec_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Combine1())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("SST1");
@@ -113,45 +113,70 @@ namespace phoenix_compiler
             log.AddLog("Combine1", getToken());
 
             if (TokenIs_ID())
-            {                
-                if (Ter41()) 
-                     return ReturnTrue();
+            {
+                if (Ter41()) return true;
             }
             else if (TokenIs_DT())
-            {                
+            {
                 if (Ter51())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("empty"))
-            {                
+            {
                 if (TokenIs_ID())
-                {                   
-                    if (Fn_Def()) return ReturnTrue();
+                {
+                    if (Fn_Def()) return true;
                 }
             }
             else if (TokenIs("general"))
-            {                
+            {
                 if (Ter1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("personal"))
             {
                 if (Ter1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
+            /*else if (TokenIs("this"))
+            {                
+                if (TokenIs("."))
+                {                    
+                    if (TokenIs_ID())
+                    {                        
+                        if (Assign_St())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (TokenIs("super"))
+            {
+                if (TokenIs("."))
+                {
+                    if (TokenIs_ID())
+                    {
+                        if (Assign_St())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }*/
             else if (Class_Def())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Int_Def())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Combine1");
@@ -164,15 +189,15 @@ namespace phoenix_compiler
 
             if (Class_Def())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Int_Def())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (G_Fn_Def())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter1");
@@ -184,41 +209,41 @@ namespace phoenix_compiler
 
             if (while_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Do_While())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (If_Else())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Ret_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Export_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (TokenIs("break"))
             {
                 if (TokenIs(";"))
-                    return ReturnTrue();
+                    return true;
             }
             else if (TokenIs("continue"))
             {
                 if (TokenIs(";"))
-                    return ReturnTrue();
+                    return true;
             }
             else if (Inc_Dec_St())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Combine())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("SST");
@@ -232,34 +257,34 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
             {
-                if (Ter41()) return ReturnTrue();
+                if (Ter4()) return true;
             }
             else if (TokenIs_DT())
             {
                 if (Ter5())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             /*else if (TokenIs("empty"))
             {
                 if (TokenIs_ID())
                 {
-                    if (Fn_Def()) return ReturnTrue();
+                    if (Fn_Def()) return true;
                 }
             }
             else if (TokenIs("general"))
             {
                 if (G_Fn_Def())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("personal"))
             {
                 if (G_Fn_Def())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }*/
             else if (TokenIs("this"))
@@ -267,10 +292,12 @@ namespace phoenix_compiler
                 if (TokenIs("."))
                 {
                     if (TokenIs_ID())
-                        if (Ter20()) 
-                            if(Init())
-                                if(TokenIs(";"))
-                                    return ReturnTrue();
+                    {
+                        if (Ops1())
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
             else if (TokenIs("super"))
@@ -278,10 +305,10 @@ namespace phoenix_compiler
                 if (TokenIs("."))
                 {
                     if (TokenIs_ID())
-                    { 
+                    {
                         if (Ops1())
                         {
-                            return ReturnTrue();
+                            return true;
                         }
                     }
                 }
@@ -297,15 +324,15 @@ namespace phoenix_compiler
 
             if (TokenIs("["))
             {
-                if (Ter2()) return ReturnTrue();
+                if (Ter2()) return true;
             }
             else if (TokenIs_ID())
             {
-                if (Dec()) return ReturnTrue();
+                if (Dec()) return true;
             }
             else if (Ops1())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter4");
@@ -317,19 +344,15 @@ namespace phoenix_compiler
 
             if (TokenIs("["))
             {
-                if (Ter211())
-                    if (TokenIs(";"))
-                            return ReturnTrue();
+                if (Ter211()) return true;
             }
             else if (TokenIs_ID())
             {
-                if (Ter7()) return ReturnTrue();
+                if (Ter7()) return true;
             }
             else if (Ops1())
             {
-                if(Init())
-                    if (TokenIs(";"))
-                        return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter41");
@@ -342,11 +365,11 @@ namespace phoenix_compiler
 
             if (Comma())
             {
-                if(TokenIs("]"))
+                if (TokenIs("]"))
                 {
                     if (TokenIs_ID())
                     {
-                        if(G_Array_Def()) return ReturnTrue();
+                        if (G_Array_Def()) return true;
                     }
                 }
             }
@@ -354,7 +377,7 @@ namespace phoenix_compiler
             {
                 if (TokenIs("]"))
                 {
-                    if (Ops1()) return ReturnTrue();
+                    if (Ops1()) return true;
                 }
             }
 
@@ -368,7 +391,7 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
             {
-                if (Dec()) return ReturnTrue();
+                if (Dec()) return true;
             }
             else if (TokenIs("["))
             {
@@ -378,7 +401,7 @@ namespace phoenix_compiler
                     {
                         if (TokenIs_ID())
                         {
-                            if (G_Array_Def()) return ReturnTrue();
+                            if (G_Array_Def()) return true;
                         }
                     }
                 }
@@ -394,7 +417,7 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
             {
-                if (Ter7()) return ReturnTrue();
+                if (Ter7()) return true;
             }
             else if (TokenIs("["))
             {
@@ -404,7 +427,7 @@ namespace phoenix_compiler
                     {
                         if (TokenIs_ID())
                         {
-                            if (Ter8()) return ReturnTrue();
+                            if (Ter8()) return true;
                         }
                     }
                 }
@@ -418,11 +441,8 @@ namespace phoenix_compiler
         {
             log.AddLog("Tr7", getToken());
 
-            if (Dec())
-            {
-                return ReturnTrue();
-            }
-            else if (Fn_Def()) return ReturnTrue();
+            if (Dec()) return true;
+            else if (Fn_Def()) return true;
 
             return ReturnFalse("Ter7");
         }
@@ -432,8 +452,8 @@ namespace phoenix_compiler
         {
             log.AddLog("Ter8", getToken());
 
-            if (Fn_Def()) return ReturnTrue();
-            else if (G_Array_Def()) return ReturnTrue();
+            if (Fn_Def()) return true;
+            else if (G_Array_Def()) return true;
 
             return ReturnFalse("Ter8");
         }
@@ -441,12 +461,10 @@ namespace phoenix_compiler
 
         private static bool Abs()
         {
-            if (!getToken().Value.Equals("abstract")) return true;
-
             log.AddLog("Abs", getToken());
 
-            if (TokenIs("abstract")) return ReturnTrue();
-            else return ReturnTrue();
+            if (TokenIs("abstract")) return true;
+            else return true;
         }
 
 
@@ -456,13 +474,13 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
             {
-                if (Ter18()) return ReturnTrue();
+                if (Ter18()) return true;
             }
             else if (TokenIs_DT())
             {
-                if (Ter18()) return ReturnTrue();
+                if (Ter18()) return true;
             }
-            else if (TokenIs("empty")) return ReturnTrue();
+            else if (TokenIs("empty")) return true;
 
             return ReturnFalse("CDT_ID");
         }
@@ -476,10 +494,10 @@ namespace phoenix_compiler
             {
                 if (Comma())
                 {
-                    if (TokenIs("]")) return ReturnTrue();
+                    if (TokenIs("]")) return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Ter18");
         }
@@ -490,8 +508,8 @@ namespace phoenix_compiler
             log.AddLog("Comma", getToken());
 
             if (TokenIs(","))
-                return ReturnTrue();
-            else return ReturnTrue();
+                return true;
+            else return true;
         }
 
 
@@ -499,8 +517,8 @@ namespace phoenix_compiler
         {
             log.AddLog("DT_ID", getToken());
 
-            if (TokenIs_ID()) return ReturnTrue();
-            else if (TokenIs_DT()) return ReturnTrue();
+            if (TokenIs_ID()) return true;
+            else if (TokenIs_DT()) return true;
 
             return ReturnFalse("DT_ID");
         }
@@ -510,10 +528,10 @@ namespace phoenix_compiler
             log.AddLog("AM", getToken());
 
             if (TokenIs("general"))
-                return ReturnTrue();
+                return true;
             else if (TokenIs("personal"))
-                return ReturnTrue();
-            else return ReturnTrue();
+                return true;
+            else return true;
         }
 
 
@@ -523,7 +541,7 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
                 if (Rep_IDS())
-                    return ReturnTrue();
+                    return true;
 
             return ReturnFalse("IDS");
         }
@@ -537,7 +555,7 @@ namespace phoenix_compiler
 
             if (TokenIs(","))
             {
-                if (IDS()) return ReturnTrue();
+                if (IDS()) return true;
             }
             else return true;
 
@@ -547,61 +565,55 @@ namespace phoenix_compiler
         private static bool Dot_Chain()
         {
             log.AddLog("Dot_Chain", getToken());
-            
+
             if (TokenIs("["))
             {
                 if (Value())
                     if (TokenIs("]"))
                         if (Ops1())
-                            return ReturnTrue();
+                            return true;
             }
             else if (Ops1())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Dot_Chain");
-        }        
+        }
+
 
 
         private static bool Ops1()
         {
-            if(Utility.EnableSS && !(getToken().Value.Equals(".") || getToken().Value.Equals("("))) return true;
-
             log.AddLog("Ops1", getToken());
 
             if (TokenIs("."))
             {
                 if (TokenIs_ID())
-                    if (Ter20()) return ReturnTrue();
+                    if (Ter20()) return true;
             }
             else if (Fn_Call())
             {
-                if (Fn_Op()) return ReturnTrue();
+                if (Fn_Op()) return true;
             }
-            else return ReturnTrue();
-
-            /*else if (TokenIs("="))
+            else if (TokenIs("="))
             {
-                if (Ter3()) return ReturnTrue();
-            }*/
-
+                if (Ter3()) return true;
+            }
 
             return ReturnFalse("Ops1");
         }
 
         private static bool Fn_Op()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals(".")) return true;
-
             log.AddLog("Fn_Op", getToken());
 
             if (TokenIs("."))
             {
                 if (TokenIs_ID())
-                    if (Ops1()) return ReturnTrue();
+                    if (Ops1()) return true;
             }
-            else return ReturnTrue();
+            else if (TokenIs(";")) return true;
 
             return ReturnFalse("Fn_Op");
         }
@@ -613,16 +625,16 @@ namespace phoenix_compiler
 
             if (Fn_Call())
             {
-                if (Ops1()) return ReturnTrue();
+                if (Ops1()) return true;
             }
             else if (TokenIs("["))
             {
                 if (Value())
                     if (TokenIs("]"))
                         if (Ops1())
-                            return ReturnTrue();
+                            return true;
             }
-            else if (Ops1()) return ReturnTrue();
+            else if (Ops1()) return true;
 
             return ReturnFalse("Ter20");
         }
@@ -634,7 +646,7 @@ namespace phoenix_compiler
 
             if (Exp())
                 if (Ops2())
-                    return ReturnTrue();
+                    return true;
 
             return ReturnFalse("Value");
         }
@@ -645,9 +657,9 @@ namespace phoenix_compiler
 
             if (TokenIs(","))
             {
-                if (Exp()) return ReturnTrue();
+                if (Exp()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Ops2");
         }
@@ -661,14 +673,14 @@ namespace phoenix_compiler
             {
                 if (TokenIs_ID())
                 {
-                    if (Ter19()) return ReturnTrue();
+                    if (Ter19()) return true;
                 }
                 else if (TokenIs_DT())
                 {
-                    if (Ter19()) return ReturnTrue();
+                    if (Ter19()) return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Input_Par");
         }
@@ -680,7 +692,7 @@ namespace phoenix_compiler
             if (TokenIs_ID())
             {
                 if (Rpt())
-                    return ReturnTrue();
+                    return true;
             }
             else if (TokenIs("["))
             {
@@ -688,7 +700,7 @@ namespace phoenix_compiler
                     if (TokenIs("]"))
                         if (TokenIs_ID())
                             if (Rpt())
-                                return ReturnTrue();
+                                return true;
             }
 
             return ReturnFalse("Ter19");
@@ -700,9 +712,9 @@ namespace phoenix_compiler
 
             if (TokenIs(","))
             {
-                if (Input_Par()) return ReturnTrue();
+                if (Input_Par()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Rpt");
         }
@@ -714,9 +726,9 @@ namespace phoenix_compiler
             if (SelectionSets.Check_MST_SelectionSet(getToken()))
             {
                 if (SST())
-                    if (MST()) return ReturnTrue();                
+                    if (MST()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("MST");
         }
@@ -727,18 +739,18 @@ namespace phoenix_compiler
 
             if (TokenIs(";"))
             {
-                return ReturnTrue();
+                return true;
             }
             else if (TokenIs("{"))
             {
                 if (MST())
                     if (TokenIs("}"))
-                        return ReturnTrue();
+                        return true;
             }
             else if (SST())
             {
-                return ReturnTrue();
-            }            
+                return true;
+            }
 
             return ReturnFalse("Body");
         }
@@ -750,14 +762,14 @@ namespace phoenix_compiler
             if (TokenIs("this"))
             {
                 if (TokenIs("."))
-                    return ReturnTrue();
+                    return true;
             }
             else if (TokenIs("super"))
             {
                 if (TokenIs("."))
-                    return ReturnTrue();
+                    return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("TS");
         }
@@ -767,12 +779,12 @@ namespace phoenix_compiler
         {
             log.AddLog("Const", getToken());
 
-            if (IsConstant()) return ReturnTrue();
+            if (IsConstant()) return true;
 
             return ReturnFalse("Const");
         }
 
-       
+
 
 
 
@@ -781,7 +793,7 @@ namespace phoenix_compiler
                 GENERAL
         */ //#################################################
 
-            
+
 
         private static bool while_St()
         {
@@ -789,15 +801,15 @@ namespace phoenix_compiler
 
             log.AddLog("while_St", getToken());
 
-            if(TokenIs("repeat"))
-            {                
-                if(TokenIs("("))
+            if (TokenIs("repeat"))
+            {
+                if (TokenIs("("))
                 {
                     if (Exp())
                     {
-                        if(TokenIs(")"))
+                        if (TokenIs(")"))
                         {
-                            if(Body()) return ReturnTrue();
+                            if (Body()) return true;
                         }
                     }
                 }
@@ -806,7 +818,7 @@ namespace phoenix_compiler
             return ReturnFalse("while_St");
         }
 
-        
+
 
         private static bool Do_While()
         {
@@ -828,7 +840,7 @@ namespace phoenix_compiler
                                 {
                                     if (TokenIs(";"))
                                     {
-                                        return ReturnTrue();
+                                        return true;
                                     }
                                 }
                             }
@@ -855,8 +867,8 @@ namespace phoenix_compiler
                         if (TokenIs(")"))
                         {
                             if (Body())
-                                if(Else()) return ReturnTrue();
-                        } 
+                                if (Else()) return true;
+                        }
                     }
                 }
             }
@@ -872,26 +884,24 @@ namespace phoenix_compiler
 
             if (TokenIs("or"))
             {
-                if (Body()) return ReturnTrue();
+                if (Body()) return true;
             }
-            else return ReturnTrue();           
+            else return true;
 
             return ReturnFalse("Else");
         }
 
         private static bool Fn_Call()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("(")) return false;
-
             log.AddLog("Fn_Call", getToken());
 
             if (TokenIs("("))
-            {                
+            {
                 if (Par())
                 {
                     if (TokenIs(")"))
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
@@ -904,9 +914,9 @@ namespace phoenix_compiler
 
             if (SelectionSets.Check_Par_Selection_Set(getToken().Value))
             {
-                if (Par1()) return ReturnTrue();
+                if (Par1()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Par");
         }
@@ -917,7 +927,7 @@ namespace phoenix_compiler
 
             if (Exp())
             {
-                if (Par2()) return ReturnTrue();                
+                if (Par2()) return true;
             }
 
             return ReturnFalse("Par1");
@@ -927,12 +937,12 @@ namespace phoenix_compiler
         {
             log.AddLog("Par2", getToken());
             if (TokenIs(","))
-            {                
-                if (Par1()) return ReturnTrue();
+            {
+                if (Par1()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
-            return ReturnFalse("Par2");        
+            return ReturnFalse("Par2");
         }
 
 
@@ -942,12 +952,12 @@ namespace phoenix_compiler
 
             log.AddLog("Ret_St", getToken());
 
-            if(TokenIs("rtn"))
+            if (TokenIs("rtn"))
             {
-                if (X()) return ReturnTrue();
+                if (X()) return true;
             }
 
-            return ReturnFalse("Ret_St"); 
+            return ReturnFalse("Ret_St");
         }
 
         private static bool X()
@@ -955,25 +965,23 @@ namespace phoenix_compiler
             log.AddLog("X", getToken());
 
             if (TokenIs(";"))
-            {                
-                return ReturnTrue();
+            {
+                return true;
             }
-            else if(Ter3()) return ReturnTrue();
+            else if (Ter3()) return true;
 
-            return ReturnFalse("X"); 
+            return ReturnFalse("X");
         }
 
         private static bool Follow_Dot_Chain()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals(".")) return true;
-
             log.AddLog("Follow_Dot_Chain", getToken());
 
             if (TokenIs("."))
             {
-                if (Dot_Chain()) return ReturnTrue();
+                if (Dot_Chain()) return true;
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Follow_Dot_Chain");
         }
@@ -984,64 +992,64 @@ namespace phoenix_compiler
 
             if (IsConstant())
             {
-                if(TokenIs(";")) return ReturnTrue();
+                if (TokenIs(";")) return true;
             }
             else if (TokenIs("!"))
-            {                
+            {
                 if (F())
                 {
-                    if(TokenIs(";"))
-                    {                        
-                        return ReturnTrue();
+                    if (TokenIs(";"))
+                    {
+                        return true;
                     }
                 }
             }
             else if (TokenIs_ID())
-            {                
+            {
                 if (Ter9())
                 {
-                    if(TokenIs(";"))
+                    if (TokenIs(";"))
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
             else if (IsIncDecOperator())
-            {       
+            {
                 if (Ter10())
                 {
                     if (TokenIs(";"))
-                    {                        
-                        return ReturnTrue();
+                    {
+                        return true;
                     }
                 }
             }
             else if (TokenIs("("))
-            {                
+            {
                 if (Exp())
                 {
-                    if(TokenIs( ")"))
-                    {                        
-                        if(TokenIs(";"))
-                        {                            
-                            return ReturnTrue();
+                    if (TokenIs(")"))
+                    {
+                        if (TokenIs(";"))
+                        {
+                            return true;
                         }
                     }
                 }
             }
             else if (TokenIs("this"))
             {
-                if(TokenIs("."))
-                {                    
+                if (TokenIs("."))
+                {
                     if (TokenIs_ID())
-                    {                        
+                    {
                         if (Fn_Call())
                         {
                             if (Follow_Dot_Chain())
                             {
-                                if(TokenIs(";"))
-                                {                                    
-                                    return ReturnTrue();                                    
+                                if (TokenIs(";"))
+                                {
+                                    return true;
                                 }
                             }
                         }
@@ -1049,18 +1057,18 @@ namespace phoenix_compiler
                 }
             }
             else if (TokenIs("super"))
-            {                
+            {
                 if (TokenIs("."))
-                {                    
+                {
                     if (TokenIs_ID())
-                    {                        
+                    {
                         if (Fn_Call())
                         {
                             if (Follow_Dot_Chain())
                             {
                                 if (TokenIs(";"))
                                 {
-                                    return ReturnTrue();
+                                    return true;
                                 }
                             }
                         }
@@ -1069,7 +1077,7 @@ namespace phoenix_compiler
             }
             else if (TokenIs("new"))
             {
-                if (Ter6()) return ReturnTrue();                
+                if (Ter6()) return true;
             }
             return ReturnFalse("Ter3");
         }
@@ -1079,16 +1087,16 @@ namespace phoenix_compiler
             log.AddLog("Ter6", getToken());
 
             if (TokenIs_DT())
-            {                
-                if(TokenIs("["))
-                {                    
+            {
+                if (TokenIs("["))
+                {
                     if (Value())
                     {
                         if (TokenIs("]"))
-                        {                            
+                        {
                             if (Hard_Code())
                             {
-                                return ReturnTrue();
+                                return true;
                             }
                         }
 
@@ -1096,10 +1104,10 @@ namespace phoenix_compiler
                 }
             }
             else if (TokenIs_ID())
-            {                
+            {
                 if (Ter21())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
 
@@ -1112,14 +1120,14 @@ namespace phoenix_compiler
 
             if (Comma())
             {
-                if(TokenIs("]"))
+                if (TokenIs("]"))
                     if (TokenIs_ID())
-                        if (Ter8()) return ReturnTrue();
+                        if (Ter8()) return true;
             }
             else if (Value())
             {
                 if (TokenIs("]"))
-                    if (Ops1()) return ReturnTrue();
+                    if (Ops1()) return true;
             }
 
             return ReturnFalse("Ter211");
@@ -1131,14 +1139,14 @@ namespace phoenix_compiler
             log.AddLog("Ter21", getToken());
 
             if (TokenIs("["))
-            {                
+            {
                 if (Value())
                 {
                     if (TokenIs("]"))
-                    {                        
+                    {
                         if (Hard_Code())
                         {
-                            return ReturnTrue();
+                            return true;
                         }
                     }
 
@@ -1148,9 +1156,9 @@ namespace phoenix_compiler
             {
                 if (Follow_Dot_Chain())
                 {
-                    if(TokenIs(";"))
-                    {                        
-                        return ReturnTrue();
+                    if (TokenIs(";"))
+                    {
+                        return true;
                     }
                 }
             }
@@ -1163,20 +1171,20 @@ namespace phoenix_compiler
             log.AddLog("Imp_St", getToken());
 
             if (TokenIs("import"))
-            {                
+            {
                 if (TokenIs("{"))
-                {                    
+                {
                     if (IDS1())
                     {
                         if (TokenIs("}"))
-                        {                            
+                        {
                             if (TokenIs("from"))
-                            {                                
+                            {
                                 if (IsStringConstant())
-                                {                              
+                                {
                                     if (TokenIs(";"))
-                                    {                                        
-                                        return ReturnTrue();
+                                    {
+                                        return true;
                                     }
                                 }
                             }
@@ -1194,45 +1202,40 @@ namespace phoenix_compiler
 
             if (TokenIs("*"))
             {
-                return ReturnTrue();
+                return true;
             }
             else if (IDS())
             {
-                return ReturnTrue();
+                return true;
             }
-            
+
 
             return ReturnFalse("IDS1");
         }
 
         private static bool Dec()
         {
-            if (Utility.EnableSS && !SelectionSets.Check_Dec_Selection_Set(getToken())) return false;
-
             log.AddLog("Dec", getToken());
 
             if (Init())
             {
-                if (List()) return ReturnTrue();                
+                if (List()) return true;
             }
-
             return ReturnFalse("Dec");
         }
 
         private static bool Init()
         {
-            if(Utility.EnableSS && !getToken().Value.Equals("=")) return true;
-
             log.AddLog("Init", getToken());
 
             if (TokenIs("="))
-            {                
+            {
                 if (Exp())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Init");
         }
@@ -1243,16 +1246,16 @@ namespace phoenix_compiler
             log.AddLog("List", getToken());
 
             if (TokenIs(";"))
-            {                
-                return ReturnTrue();
+            {
+                return true;
             }
             else if (TokenIs(","))
-            {                
+            {
                 if (TokenIs_ID())
                 {
                     if (Init())
                     {
-                        if (List()) return ReturnTrue();
+                        if (List()) return true;
                     }
                 }
             }
@@ -1266,11 +1269,11 @@ namespace phoenix_compiler
 
             if (Dot_Chain())
             {
-                if(TokenIs("="))
-                {                    
+                if (TokenIs("="))
+                {
                     if (Ter3())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
@@ -1290,7 +1293,7 @@ namespace phoenix_compiler
                 {
                     if (Dot_Chain())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
@@ -1306,14 +1309,14 @@ namespace phoenix_compiler
             log.AddLog("Export_St", getToken());
 
             if (TokenIs("export"))
-            {                
+            {
                 if (TokenIs("="))
                 {
                     if (TokenIs_ID())
-                    {                        
-                        if(TokenIs(";"))
+                    {
+                        if (TokenIs(";"))
                         {
-                            return ReturnTrue();
+                            return true;
                         }
                     }
                 }
@@ -1330,13 +1333,13 @@ namespace phoenix_compiler
             if (CDT_ID())
             {
                 if (TokenIs_ID())
-                {                    
+                {
                     if (Fn_Def())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
-            }            
+            }
             return ReturnFalse("G_Fn_Def");
         }
 
@@ -1345,18 +1348,18 @@ namespace phoenix_compiler
             log.AddLog("Fn_Def", getToken());
 
             if (TokenIs("("))
-            {                
+            {
                 if (Input_Par())
                 {
                     if (TokenIs(")"))
-                    {                        
+                    {
                         if (TokenIs("{"))
-                        {                            
+                        {
                             if (MST())
                             {
-                                if(TokenIs("}"))
+                                if (TokenIs("}"))
                                 {
-                                    return ReturnTrue();
+                                    return true;
                                 }
                             }
                         }
@@ -1372,12 +1375,12 @@ namespace phoenix_compiler
             log.AddLog("G_Array_Def", getToken());
 
             if (TokenIs(";"))
-            {                
-                return ReturnTrue();
+            {
+                return true;
             }
-            else if(TokenIs("="))
-            {                
-                if (Init1()) return ReturnTrue();                
+            else if (TokenIs("="))
+            {
+                if (Init1()) return true;
             }
 
             return ReturnFalse("G_Array_Def");
@@ -1388,18 +1391,18 @@ namespace phoenix_compiler
             log.AddLog("Init1", getToken());
 
             if (TokenIs("new"))
-            {                
+            {
                 if (DT_ID())
                 {
                     if (TokenIs("["))
-                    {  
+                    {
                         if (Values())
                         {
                             if (TokenIs("]"))
-                            {                                
+                            {
                                 if (Hard_Code())
                                 {
-                                    return ReturnTrue();
+                                    return true;
                                 }
                             }
                         }
@@ -1416,18 +1419,18 @@ namespace phoenix_compiler
             log.AddLog("Hard_Code", getToken());
 
             if (TokenIs(";"))
-            {                
-                return ReturnTrue();
+            {
+                return true;
             }
-            else if(TokenIs("{"))
-            {                
+            else if (TokenIs("{"))
+            {
                 if (Values())
                 {
                     if (Value_Bracket())
                     {
                         if (TokenIs(";"))
                         {
-                            return ReturnTrue();
+                            return true;
                         }
                     }
                 }
@@ -1442,12 +1445,12 @@ namespace phoenix_compiler
             log.AddLog("Value_Bracket", getToken());
 
             if (TokenIs(","))
-            {                
+            {
                 if (Values())
                 {
                     if (TokenIs("}"))
-                    {                        
-                        return ReturnTrue();
+                    {
+                        return true;
                     }
                 }
             }
@@ -1455,7 +1458,7 @@ namespace phoenix_compiler
             {
                 if (TokenIs("}"))
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
 
@@ -1471,7 +1474,7 @@ namespace phoenix_compiler
             {
                 if (Ops3())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             return ReturnFalse("Values");
@@ -1483,13 +1486,13 @@ namespace phoenix_compiler
             log.AddLog("Ops3", getToken());
 
             if (TokenIs(","))
-            {                
+            {
                 if (Values())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
             return ReturnFalse("Ops3");
         }
 
@@ -1501,7 +1504,7 @@ namespace phoenix_compiler
             {
                 if (Exp1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             return ReturnFalse("Exp");
@@ -1517,11 +1520,11 @@ namespace phoenix_compiler
                 {
                     if (Exp1())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Exp1");
         }
@@ -1534,7 +1537,7 @@ namespace phoenix_compiler
             {
                 if (AE1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             return ReturnFalse("AE");
@@ -1551,11 +1554,11 @@ namespace phoenix_compiler
                 {
                     if (AE1())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("AE1");
         }
@@ -1569,7 +1572,7 @@ namespace phoenix_compiler
             {
                 if (RE1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             return ReturnFalse("RE");
@@ -1585,11 +1588,11 @@ namespace phoenix_compiler
                 {
                     if (RE1())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("RE1");
         }
@@ -1602,7 +1605,7 @@ namespace phoenix_compiler
             {
                 if (P1())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
 
@@ -1619,11 +1622,11 @@ namespace phoenix_compiler
                 {
                     if (P1())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
             return ReturnFalse("P1");
         }
 
@@ -1631,11 +1634,15 @@ namespace phoenix_compiler
         {
             log.AddLog("T", getToken());
 
-            if (F())
+            if (SelectionSets.Check_F_Selection_Set(getToken().Value))
             {
-                if (T1())
-                    return ReturnTrue();
+                if (F())
+                {
+                    if (T1())
+                        return true;
+                }
             }
+            else return true;
 
             return ReturnFalse("T");
         }
@@ -1650,11 +1657,11 @@ namespace phoenix_compiler
                 {
                     if (T1())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("T1");
         }
@@ -1665,27 +1672,27 @@ namespace phoenix_compiler
 
             if (IsConstant())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (TokenIs("!"))
             {
-                if (F()) return ReturnTrue();
+                if (F()) return true;
             }
             else if (TokenIs_ID())
             {
-                if (Ter9()) return ReturnTrue();
+                if (Ter9()) return true;
             }
             else if (IsIncDecOperator())
             {
-                if (Ter10()) return ReturnTrue();
-            } 
+                if (Ter10()) return true;
+            }
             else if (TokenIs("("))
             {
                 if (Exp())
                 {
                     if (TokenIs(")"))
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
@@ -1695,61 +1702,73 @@ namespace phoenix_compiler
                 {
                     if (Fn_Call())
                     {
-                        if (Ops1())
+                        if (Follow_Dot_Chain())
                         {
-                            return ReturnTrue();
+                            //if(TokenIs(";")) return true; Exp Implemented
+                            return true;
+
                         }
                     }
                 }
             }
             else if (TokenIs("this"))
-            {                
+            {
                 if (TokenIs("."))
                 {
                     if (TokenIs_ID())
-                        if (Ter20())
-                            return ReturnTrue();
-                }
-            }
-            else if (TokenIs("super"))
-            {                
-                if (TokenIs("."))
-                {                    
-                    if (TokenIs_ID())
-                    {                        
+                    {
                         if (Fn_Call())
                         {
                             if (Follow_Dot_Chain())
                             {
-                                //if (TokenIs(";")) return ReturnTrue();
-                                return ReturnTrue();
+                                //if (TokenIs(";")) return true;
+                                return true;
                             }
                         }
                     }
                 }
             }
-            
+            else if (TokenIs("super"))
+            {
+                if (TokenIs("."))
+                {
+                    if (TokenIs_ID())
+                    {
+                        if (Fn_Call())
+                        {
+                            if (Follow_Dot_Chain())
+                            {
+                                //if (TokenIs(";")) return true;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
             return ReturnFalse("F");
         }
 
         private static bool Ter9()
         {
-            log.AddLog("Ter9", getToken());            
+            log.AddLog("Ter9", getToken());
 
-            if (Utility.EnableSS && SelectionSets.Check_Ter9_Selection_Set(getToken().Value))
+
+
+            if (SelectionSets.Check_Ter9_Selection_Set(getToken().Value))
             {
                 if (Dot_Chain())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
                 else if (Fn_Call())
                 {
                     if (Follow_Dot_Chain())
-                        return ReturnTrue();
+                        return true;
                 }
 
-            }            
-            else return ReturnTrue();
+            }
+            else return true;
 
             return ReturnFalse("Ter9");
         }
@@ -1759,12 +1778,12 @@ namespace phoenix_compiler
             log.AddLog("AE1", getToken());
 
             if (TokenIs("("))
-            {                
+            {
                 if (Exp())
                 {
                     if (TokenIs(")"))
-                    {                        
-                        return ReturnTrue();
+                    {
+                        return true;
                     }
                 }
             }
@@ -1772,7 +1791,7 @@ namespace phoenix_compiler
             {
                 if (Dot_Chain())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             return ReturnFalse("Ter10");
@@ -1780,25 +1799,23 @@ namespace phoenix_compiler
 
         private static bool Class_Def()
         {
-            if (Utility.EnableSS && !(getToken().Value.Equals("abstract") || getToken().Value.Equals("class"))) return false;
-
             log.AddLog("Class_Def", getToken());
 
             if (Abs())
             {
                 if (TokenIs("class"))
-                {                    
+                {
                     if (TokenIs_ID())
-                    {                        
+                    {
                         if (Ter())
                         {
                             if (TokenIs("{"))
-                            {                                
+                            {
                                 if (Class_Body())
                                 {
                                     if (TokenIs("}"))
-                                    {                                        
-                                        return ReturnTrue();
+                                    {
+                                        return true;
                                     }
                                 }
                             }
@@ -1812,38 +1829,34 @@ namespace phoenix_compiler
 
         private static bool Ter()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("@")) return true;
-
             log.AddLog("Ter", getToken());
 
             if (TokenIs("@"))
-            {                
+            {
                 if (TokenIs_ID())
-                {                    
+                {
                     if (Ter11())
                     {
-                        return ReturnTrue();
+                        return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
             return ReturnFalse("Ter");
         }
 
         private static bool Ter11()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("applies")) return true;
-
             log.AddLog("Ter11", getToken());
 
             if (TokenIs("applies"))
             {
                 if (IDS())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
             return ReturnFalse("Ter11");
         }
 
@@ -1855,35 +1868,35 @@ namespace phoenix_compiler
             {
                 if (Ter12())
                 {
-                    if (Class_Body()) return ReturnTrue();
+                    if (Class_Body()) return true;
                 }
             }
             else if (TokenIs("general"))
             {
                 if (Ter12())
                 {
-                    if (Class_Body()) return ReturnTrue();
+                    if (Class_Body()) return true;
                 }
             }
             else if (TokenIs("abstract"))
             {
                 if (Obj_Fn())
                 {
-                    if (Class_Body()) return ReturnTrue();
+                    if (Class_Body()) return true;
                 }
             }
             else if (TokenIs_ID())
             {
                 if (Ter13())
                 {
-                    if (Class_Body()) return ReturnTrue();
+                    if (Class_Body()) return true;
                 }
             }
             else if (TokenIs_DT())
             {
                 if (Ter14())
                 {
-                    if (Class_Body()) return ReturnTrue();
+                    if (Class_Body()) return true;
                 }
             }
             else if (TokenIs("empty"))
@@ -1892,11 +1905,11 @@ namespace phoenix_compiler
                 {
                     if (Cntr())
                     {
-                        if (Class_Body()) return ReturnTrue();
+                        if (Class_Body()) return true;
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Class_Body");
         }
@@ -1909,7 +1922,7 @@ namespace phoenix_compiler
             {
                 if (Ter23())
                 {
-                    if (Cntr()) return ReturnTrue();
+                    if (Cntr()) return true;
                 }
             }
             else if (TokenIs_DT())
@@ -1917,16 +1930,16 @@ namespace phoenix_compiler
                 if (Ter18())
                 {
                     if (TokenIs_ID())
-                    {                        
-                        if (Cntr()) return ReturnTrue();
+                    {
+                        if (Cntr()) return true;
                     }
                 }
             }
             else if (TokenIs("empty"))
             {
                 if (TokenIs_ID())
-                {                    
-                    if(Cntr()) return ReturnTrue();
+                {
+                    if (Cntr()) return true;
                 }
             }
 
@@ -1939,47 +1952,47 @@ namespace phoenix_compiler
             log.AddLog("Ter23", getToken());
 
             if (TokenIs_ID())
-            {                
-                return ReturnTrue();
+            {
+                return true;
             }
             else if (TokenIs("["))
-            {                
+            {
                 if (Comma())
                 {
                     if (TokenIs("]"))
-                    {                        
+                    {
                         if (TokenIs_ID())
-                        {                            
-                            return ReturnTrue();
+                        {
+                            return true;
                         }
                     }
 
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Ter23");
         }
-        
+
 
         private static bool Super()
         {
             log.AddLog("Super", getToken());
 
             if (TokenIs("super"))
-            {                
+            {
                 if (TokenIs("("))
-                {                    
+                {
                     if (Par())
                     {
                         if (TokenIs(")"))
-                        {                            
-                            return ReturnTrue();
+                        {
+                            return true;
                         }
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Super");
         }
@@ -1989,31 +2002,31 @@ namespace phoenix_compiler
             log.AddLog("Ter12", getToken());
 
             if (TokenIs("abstract"))
-            {                
+            {
                 if (Obj_Fn())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs_DT())
             {
                 if (Ter17())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs_ID())
             {
                 if (Ter121())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("empty"))
-            {   
+            {
                 if (TokenIs_ID())
-                {   
-                    if(Cntr()) return ReturnTrue();
+                {
+                    if (Cntr()) return true;
                 }
             }
 
@@ -2024,8 +2037,8 @@ namespace phoenix_compiler
         {
             log.AddLog("Ter121", getToken());
 
-            if (Ter7()) return ReturnTrue();
-            else if (Cntr()) return ReturnTrue();
+            if (Ter7()) return true;
+            else if (Cntr()) return true;
 
             return ReturnFalse("Ter121");
         }
@@ -2033,25 +2046,23 @@ namespace phoenix_compiler
 
         private static bool Cntr()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("(")) return false;                     
-
             log.AddLog("Cntr", getToken());
 
             if (TokenIs("("))
-            {   
+            {
                 if (Input_Par())
                 {
                     if (TokenIs(")"))
-                    {                        
+                    {
                         if (TokenIs("{"))
-                        {                            
+                        {
                             if (Super())
                             {
                                 if (MST())
                                 {
-                                    if(TokenIs("}"))
-                                    {                                        
-                                        return ReturnTrue();
+                                    if (TokenIs("}"))
+                                    {
+                                        return true;
                                     }
                                 }
                             }
@@ -2068,30 +2079,30 @@ namespace phoenix_compiler
             log.AddLog("Ter13", getToken());
 
             if (TokenIs_ID())
-            {   
+            {
                 if (Ter16())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("["))
-            {                
+            {
                 if (Comma())
                 {
                     if (TokenIs("]"))
                     {
-                        
+
                         if (TokenIs_ID())
                         {
-                            
-                            if (Ter15()) return ReturnTrue();
+
+                            if (Ter15()) return true;
                         }
                     }
                 }
             }
             else if (Cntr())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter13");
@@ -2103,21 +2114,21 @@ namespace phoenix_compiler
 
             if (TokenIs_ID())
             {
-                
+
                 if (Ter16())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("["))
-            {                
+            {
                 if (Comma())
                 {
                     if (TokenIs("]"))
-                    {                        
+                    {
                         if (TokenIs_ID())
-                        {                            
-                            if (Ter15()) return ReturnTrue();
+                        {
+                            if (Ter15()) return true;
                         }
                     }
                 }
@@ -2132,11 +2143,11 @@ namespace phoenix_compiler
 
             if (Cntr())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (G_Array_Def())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter15");
@@ -2148,11 +2159,11 @@ namespace phoenix_compiler
 
             if (Cntr())
             {
-                return ReturnTrue();
+                return true;
             }
             else if (Dec())
             {
-                return ReturnTrue();
+                return true;
             }
 
             return ReturnFalse("Ter16");
@@ -2163,22 +2174,22 @@ namespace phoenix_compiler
             log.AddLog("Ter17", getToken());
 
             if (TokenIs_ID())
-            {                
+            {
                 if (Ter16())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
             else if (TokenIs("["))
             {
-                
+
                 if (Comma())
                 {
                     if (TokenIs("]"))
-                    {                        
+                    {
                         if (TokenIs_ID())
-                        {                            
-                            if (Cntr()) return ReturnTrue();
+                        {
+                            if (Cntr()) return true;
                         }
                     }
                 }
@@ -2189,23 +2200,21 @@ namespace phoenix_compiler
 
         private static bool Int_Def()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("group")) return false;
-
             log.AddLog("Int_Def", getToken());
 
             if (TokenIs("group"))
-            {                
+            {
                 if (TokenIs_ID())
-                {                    
+                {
                     if (Inherit())
                     {
                         if (TokenIs("{"))
-                        {                            
+                        {
                             if (Int_Body())
                             {
                                 if (TokenIs("}"))
-                                {                                    
-                                    return ReturnTrue();
+                                {
+                                    return true;
                                 }
                             }
                         }
@@ -2222,13 +2231,13 @@ namespace phoenix_compiler
 
             if (TokenIs("applies"))
             {
-                
+
                 if (IDS())
                 {
-                    return ReturnTrue();
+                    return true;
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Inherit");
         }
@@ -2239,9 +2248,9 @@ namespace phoenix_compiler
 
             if (Int_Func())
             {
-                return ReturnTrue();
+                return true;
             }
-            else return ReturnTrue();
+            else return true;
         }
 
         private static bool Int_Func()
@@ -2251,22 +2260,22 @@ namespace phoenix_compiler
             if (AM())
             {
                 if (TokenIs("abstract"))
-                {                    
+                {
                     if (CDT_ID())
                     {
                         if (TokenIs_ID())
-                        {                            
+                        {
                             if (TokenIs("("))
-                            {                                
+                            {
                                 if (Input_Par())
                                 {
                                     if (TokenIs(")"))
-                                    {                                        
+                                    {
                                         if (TokenIs(";"))
-                                        {                                            
+                                        {
                                             if (Int_Func())
                                             {
-                                                return ReturnTrue();
+                                                return true;
                                             }
                                         }
                                     }
@@ -2276,7 +2285,7 @@ namespace phoenix_compiler
                     }
                 }
             }
-            else return ReturnTrue();
+            else return true;
 
             return ReturnFalse("Int_Func");
         }
@@ -2296,14 +2305,8 @@ namespace phoenix_compiler
             log.ChainBreak(name, tokenList[i], i);
             log.AddLOG("False", false, getToken());
             log.StopSerialFile();
-            if (Utility.ThrowSyntaxError) throw new SyntaxError(getToken().LineNumber,getToken(),name);
+            if (Utility.ThrowSyntaxError) throw new SyntaxError(getToken().LineNumber, getToken(), name);
             return false;
-        }
-
-        private static bool ReturnTrue(string name = "")
-        {
-            log.AddLOG("__backTrackTree__#", true, getToken());
-            return true;
         }
 
 
@@ -2371,7 +2374,7 @@ namespace phoenix_compiler
         private static bool TokenIs(string match)
         {
             log.CheckTerminal(match + "   result = " + getToken().Value.Equals(match), i);
-            if (getToken().Value.Equals(match)) 
+            if (getToken().Value.Equals(match))
             {
                 log.AddLOG(match, false, getToken());
                 i++;
@@ -2385,7 +2388,7 @@ namespace phoenix_compiler
             log.CheckTerminal("Checking for Identifier   result = " + (getToken().ClassName.Equals("Identifier")).ToString(), i);
             if (getToken().ClassName.Equals("Identifier"))
             {
-                log.AddLOG("ID => "+ getToken().Value, false, getToken());
+                log.AddLOG("ID => " + getToken().Value, false, getToken());
                 i++;
                 return true;
             }
