@@ -11,8 +11,8 @@ namespace Compiler_Pheonix
 {
     static public class Utility
     {
-        public static bool StopAtFalse = false;
-        public static bool ThrowSyntaxError = false;
+        public static bool StopAtFalse = true;
+        public static bool ThrowSyntaxError = true;
         public static bool EnableSS = true;
         public static bool EnableSemanticAnalysis = true;
         public static bool SyntaxHints = true;

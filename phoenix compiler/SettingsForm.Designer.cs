@@ -109,7 +109,6 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Enabled = false;
             this.checkBox4.ForeColor = System.Drawing.Color.SlateGray;
             this.checkBox4.Location = new System.Drawing.Point(231, 45);
             this.checkBox4.Name = "checkBox4";

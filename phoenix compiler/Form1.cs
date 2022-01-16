@@ -1,4 +1,6 @@
 ﻿using phoenix_compiler;
+using phoenix_compiler.Compiler_Classes;
+using phoenix_compiler.Semantic;
 using phoenix_compiler.TextGen;
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,7 @@ namespace Compiler_Pheonix
         private void MainForm_Load(object sender, EventArgs e)
         {
             TextGen.Init(CodeArea);
-            this.KeyDown += MainForm_KeyDown;               
+            this.KeyDown += MainForm_KeyDown;
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs k)
@@ -50,6 +52,9 @@ namespace Compiler_Pheonix
 
         private void RunBtn_Click(object sender, EventArgs e)
         {
+            CallLogger log = new CallLogger(false);
+            MainTable.Flush();
+
             debugWindow.Text = "";
             Thread.Sleep(300);
             AppendText(debugWindow, "Generating token list ....\n", Color.Black);
@@ -69,7 +74,7 @@ namespace Compiler_Pheonix
 
             try
             {
-                bool result = SyntaxAnalyzer.Start(tokenList);
+                bool result = SyntaxAnalyzer.Start(tokenList, out log);
                 if (result) AppendText(debugWindow, "[Syntax Error] No syntax error found. \n", Color.Green);
                 else
                 {
@@ -84,7 +89,49 @@ namespace Compiler_Pheonix
             }
             catch (SyntaxError E)
             {
-                AppendText(debugWindow, "[Syntax Error] syntax error at un specified line number : " + E.line + "  At Non-Terminal : "+E.NonTerminalName+"\n", Color.Red);
+                AppendText(debugWindow, "[Syntax Error] syntax error at line number : " + E.line + "  At Non-Terminal : "+E.NonTerminalName+"\n", Color.Red);
+                if(Utility.SyntaxHints) AppendText(debugWindow, log.GetHint(), Color.Red);
+                return;
+            }
+
+
+            // Semantic Work
+
+            try
+            {
+                if (Utility.EnableSemanticAnalysis)
+                {
+                    bool SemanticError = SemanticGrammer.Start(tokenList, log);
+                    if (SemanticError) AppendText(debugWindow, "[Semantic Error] No Semantic Errors found.\n", Color.Green);
+                    else
+                    {
+                        AppendText(debugWindow, "[Semantic Error] Unspecified semantic error.\n", Color.Red);
+                        return;
+                    }
+                }
+            }
+            catch (ReDeclarationError err)
+            {
+                AppendText(debugWindow, "[Semantic Error] " + err.Message + "\n", Color.Red);
+                return;
+            }
+            catch (UndefinedError err)
+            {
+                AppendText(debugWindow, "[Semantic Error] " + err.Message + "\n", Color.Red);
+                return;
+            }
+            catch (InterfaceExpectedError err)
+            {
+                AppendText(debugWindow, "[Semantic Error] " + err.Message + "\n", Color.Red);
+                return;
+            }
+            catch (InheritanceError err) {
+                AppendText(debugWindow, "[Semantic Error] " + err.Message + "\n", Color.Red);
+                return;
+            }
+            catch (GeneralSemanticError err)
+            {
+                AppendText(debugWindow, "[Semantic Error] " + err.Message + "\n", Color.Red);
                 return;
             }
 

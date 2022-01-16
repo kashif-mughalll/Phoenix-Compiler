@@ -43,7 +43,7 @@ namespace phoenix_compiler
             ref:base,this
             new:new
             extends:@
-            implements:apply
+            implements:applies
             interface:group
             final:closed
             abstract:abstract

@@ -59,7 +59,7 @@
     <Compile Include="Compiler Classes\Operators.cs" />
     <Compile Include="Compiler Classes\Punctuators.cs" />
     <Compile Include="Compiler Classes\SelectionSets.cs" />
-    <Compile Include="Compiler Classes\Syn.cs" />
+    <Compile Include="Compiler Classes\SemanticGrammer.cs" />
     <Compile Include="Compiler Classes\SyntaxAnalyzer.cs" />
     <Compile Include="Compiler Classes\SyntaxMessage.cs" />
     <Compile Include="Compiler Classes\TextGen.cs" />
@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semantic\ClassTable.cs" />
+    <Compile Include="Semantic\ClassTableEntry.cs" />
+    <Compile Include="Semantic\MainTable.cs" />
+    <Compile Include="Semantic\MainTableEntry.cs" />
+    <Compile Include="Semantic\SemanticErrors.cs" />
+    <Compile Include="Semantic\SemanticUtility.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -96,14 +96,14 @@
 				<Key word = "group" />
 			</KeyWords>
 		
-			<KeyWords name = "Void" bold="false" italic="false" color="DarkRed">
+			<KeyWords name = "Void" bold="true" italic="false" color="DarkRed">
 				<Key word = "empty" />
 			</KeyWords>
 		
 			
 			<KeyWords name = "Modifiers" bold="false" italic="false" color="Brown">
 				<Key word = "abstract" />
-				<Key word = "closed" />
+				<Key word = "applies" />
 				<Key word = "@" />
 				<Key word = "throw" />
 			</KeyWords>

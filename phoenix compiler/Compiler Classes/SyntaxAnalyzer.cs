@@ -14,11 +14,12 @@ namespace phoenix_compiler
         private static int i = 0;
 
 
-        public static bool Start(List<Token> _tokenList)
+        public static bool Start(List<Token> _tokenList,out CallLogger _log)
         {
             tokenList = _tokenList;
             i = 0;
             log = new CallLogger(false);
+            _log = log;
             return start();
         }
 
@@ -1812,7 +1813,7 @@ namespace phoenix_compiler
 
         private static bool Ter()
         {
-            if (Utility.EnableSS && !getToken().Value.Equals("@")) return true;
+            if (Utility.EnableSS && !(getToken().Value.Equals("@") || getToken().Value.Equals("applies"))) return true;
 
             log.AddLog("Ter", getToken());
 
@@ -1826,7 +1827,15 @@ namespace phoenix_compiler
                     }
                 }
             }
+            else if (TokenIs("applies"))
+            {
+                if (IDS())
+                {
+                    return ReturnTrue();
+                }
+            }
             else return ReturnTrue();
+
             return ReturnFalse("Ter");
         }
 
@@ -1844,6 +1853,7 @@ namespace phoenix_compiler
                 }
             }
             else return ReturnTrue();
+
             return ReturnFalse("Ter11");
         }
 
@@ -2246,6 +2256,8 @@ namespace phoenix_compiler
 
         private static bool Int_Func()
         {
+            if (Utility.EnableSS && !(getToken().Value.Equals("general") || getToken().Value.Equals("personal"))) return false;
+
             log.AddLog("Int_Func", getToken());
 
             if (AM())
@@ -2309,6 +2321,7 @@ namespace phoenix_compiler
 
         private static bool IsRelationalOperator()
         {
+            log.maintainHintStructure("Relational Operator");
             log.CheckTerminal("Relational op   result = " + Operators.IsRelationalOperator(getToken().Value), i);
 
             if (Operators.IsRelationalOperator(getToken().Value))
@@ -2323,6 +2336,7 @@ namespace phoenix_compiler
 
         private static bool IsIncDecOperator()
         {
+            log.maintainHintStructure("Increment / Decrement Operator");
             log.CheckTerminal("IncDec op   result = " + getToken().ClassName.Equals("Operator / IncDec"), i);
 
             if (getToken().ClassName.Equals("Operator / IncDec"))
@@ -2336,6 +2350,7 @@ namespace phoenix_compiler
 
         private static bool IsPM()
         {
+            log.maintainHintStructure("+ or -");
             log.CheckTerminal("PM   result = " + Operators.IsPM(getToken().Value), i);
 
             if (Operators.IsPM(getToken().Value))
@@ -2350,6 +2365,7 @@ namespace phoenix_compiler
 
         private static bool IsMDM()
         {
+            log.maintainHintStructure("* or / or %");
             log.CheckTerminal("MDM   result = " + Operators.IsMDM(getToken().Value), i);
 
             if (Operators.IsMDM(getToken().Value))
@@ -2364,12 +2380,12 @@ namespace phoenix_compiler
 
         private static Token getToken()
         {
-            //if (tokenList[i].Value == "$$$") throw new ArgumentOutOfRangeException("",i.ToString());
             return tokenList[i];
         }
 
         private static bool TokenIs(string match)
         {
+            log.maintainHintStructure(match);
             log.CheckTerminal(match + "   result = " + getToken().Value.Equals(match), i);
             if (getToken().Value.Equals(match)) 
             {
@@ -2382,6 +2398,7 @@ namespace phoenix_compiler
 
         private static bool TokenIs_ID()
         {
+            log.maintainHintStructure("Indentifier");
             log.CheckTerminal("Checking for Identifier   result = " + (getToken().ClassName.Equals("Identifier")).ToString(), i);
             if (getToken().ClassName.Equals("Identifier"))
             {
@@ -2394,6 +2411,7 @@ namespace phoenix_compiler
 
         private static bool IsStringConstant()
         {
+            log.maintainHintStructure("String Constant");
             log.CheckTerminal("String constant   result = " + getToken().ClassName.Equals("Constant / String"), i);
 
             if (getToken().ClassName.Equals("Constant / String"))
@@ -2408,6 +2426,7 @@ namespace phoenix_compiler
 
         private static bool IsConstant()
         {
+            log.maintainHintStructure("Any Constant");
             log.CheckTerminal("Constant   result = " + getToken().ClassName.Contains("Constant"), i);
 
             if (getToken().ClassName.Contains("Constant"))
@@ -2421,6 +2440,7 @@ namespace phoenix_compiler
 
         private static bool TokenIs_DT()
         {
+            log.maintainHintStructure("Primitiv Datatype");
             log.CheckTerminal("Checking for DataType   result = " + (getToken().ClassName.Equals("Keyword / DT")).ToString(), i);
             if (getToken().ClassName.Equals("Keyword / DT"))
             {
