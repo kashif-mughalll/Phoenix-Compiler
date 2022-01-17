@@ -2155,15 +2155,16 @@ namespace phoenix_compiler.Compiler_Classes
         {
             log.AddLog("Ter121", getToken());
 
-            /*if (TokenIs_ID())
+            if(getToken().ClassName == "Identifier")
             {
-                string Name = tokenList[i - 1].Value;
-
-                if (Ter7(AM,DT,Name)) return ReturnTrue();
-                else if (Cntr(AM,DT,Name)) return ReturnTrue();
-            }*/
-
-            if (Ter7(AM, null, DT)) return ReturnTrue();
+                if (TokenIs_ID())
+                {
+                    string Name = tokenList[i - 1].Value;
+                    if (Ter7(AM,DT,Name)) return ReturnTrue();
+                    else if (Cntr(AM,DT,Name)) return ReturnTrue();
+                }
+            }
+            else if (Ter7(AM, null, DT)) return ReturnTrue();
             else if (Cntr(AM, null, DT)) return ReturnTrue();
 
             return ReturnFalse("Ter121");

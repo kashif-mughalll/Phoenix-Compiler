@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace phoenix_compiler
 {
@@ -2052,7 +2053,15 @@ namespace phoenix_compiler
         {
             log.AddLog("Ter121", getToken());
 
-            if (Ter7()) return ReturnTrue();
+            if(getToken().ClassName == "Identifier")
+            {
+                if (TokenIs_ID())
+                {
+                    if (Ter7()) return ReturnTrue();
+                    else if (Cntr()) return ReturnTrue();
+                }                
+
+            } else if (Ter7()) return ReturnTrue();
             else if (Cntr()) return ReturnTrue();
 
             return ReturnFalse("Ter121");
