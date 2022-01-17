@@ -41,6 +41,8 @@ namespace phoenix_compiler.Compiler_Classes
             isGlobalScope = true;
             InsideClassBody = false;
             cTable = null;
+            FunctionTable.Flush();
+            MainTable.Flush();
             return start();
         }
 
@@ -322,7 +324,7 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_ID())
             {
-                if (Dec(null, null, null)) return ReturnTrue();
+                if (Dec("" ,"" ,"")) return ReturnTrue();
             }
             else if (Ops1())
             {
@@ -344,7 +346,7 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_ID())
             {
-                if (Ter7(null, null, null)) return ReturnTrue();
+                if (Ter7("" ,"" ,"")) return ReturnTrue();
             }
             else if (Ops1())
             {
@@ -390,7 +392,7 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs_ID())
             {
-                if (Dec(null, null, null)) return ReturnTrue();
+                if (Dec("" ,"" ,"")) return ReturnTrue();
             }
             else if (TokenIs("["))
             {
@@ -417,7 +419,7 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs_ID())
             {
-                if (Ter7(null, null, null)) return ReturnTrue();
+                if (Ter7("" ,"" ,"")) return ReturnTrue();
             }
             else if (TokenIs("["))
             {
@@ -2035,7 +2037,7 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (Ter23())
                 {
-                    if (Cntr(null, null, null)) return ReturnTrue();
+                    if (Cntr("" ,"" ,"")) return ReturnTrue();
                 }
             }
             else if (TokenIs_DT())
@@ -2044,7 +2046,7 @@ namespace phoenix_compiler.Compiler_Classes
                 {
                     if (TokenIs_ID())
                     {
-                        if (Cntr(null, null, null)) return ReturnTrue();
+                        if (Cntr("" ,"" ,"")) return ReturnTrue();
                     }
                 }
             }
@@ -2052,7 +2054,7 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (TokenIs_ID())
                 {
-                    if (Cntr(null, null, null)) return ReturnTrue();
+                    if (Cntr("" ,"" ,"")) return ReturnTrue();
                 }
             }
 

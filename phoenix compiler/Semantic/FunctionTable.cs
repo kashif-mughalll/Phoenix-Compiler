@@ -17,6 +17,7 @@ namespace phoenix_compiler.Semantic
 
         public static void AddEntry(FunctionTableEntry entry)
         {
+            if(!entry.Name.Equals(""))
             Entries.Add(entry);
         }
 

@@ -114,255 +114,84 @@ Back-Track :
 Back-Track : 
 Terminal : ):value = )%class = Punctuator / CB%line  = 7
 Terminal : {:value = {%class = Punctuator / OCB%line  = 7
-Non-Terminal : Super:value = }%class = Punctuator / CCB%line  = 7
+Non-Terminal : Super:value = int%class = Keyword / DT%line  = 8
 Back-Track : 
-Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 7
-Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 7
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = a%class = Identifier%line  = 9
-Terminal : ID => a:value = a%class = Identifier%line  = 9
-Non-Terminal : Ter13:value = (%class = Punctuator / OB%line  = 9
-Non-Terminal : Cntr:value = (%class = Punctuator / OB%line  = 9
-Terminal : (:value = (%class = Punctuator / OB%line  = 9
-Non-Terminal : Input_Par:value = int%class = Keyword / DT%line  = 9
-Terminal : int:value = int%class = Keyword / DT%line  = 9
-Non-Terminal : Ter19:value = a%class = Identifier%line  = 9
-Terminal : ID => a:value = a%class = Identifier%line  = 9
-Non-Terminal : Rpt:value = ,%class = Punctuator / Comma%line  = 9
-Terminal : ,:value = ,%class = Punctuator / Comma%line  = 9
-Non-Terminal : Input_Par2:value = int%class = Keyword / DT%line  = 9
-Terminal : int:value = int%class = Keyword / DT%line  = 9
-Non-Terminal : Ter19:value = b%class = Identifier%line  = 9
-Terminal : ID => b:value = b%class = Identifier%line  = 9
-Non-Terminal : Rpt:value = )%class = Punctuator / CB%line  = 9
+Non-Terminal : MST:value = int%class = Keyword / DT%line  = 8
+Non-Terminal : SST:value = int%class = Keyword / DT%line  = 8
+Non-Terminal : Combine:value = int%class = Keyword / DT%line  = 8
+Terminal : int:value = int%class = Keyword / DT%line  = 8
+Non-Terminal : Ter5:value = a%class = Identifier%line  = 8
+Terminal : ID => a:value = a%class = Identifier%line  = 8
+Non-Terminal : Dec:value = ;%class = Punctuator / Semicolon%line  = 8
+Non-Terminal : List:value = ;%class = Punctuator / Semicolon%line  = 8
+Terminal : ;:value = ;%class = Punctuator / Semicolon%line  = 8
 Back-Track : 
 Back-Track : 
 Back-Track : 
 Back-Track : 
-Back-Track : 
-Back-Track : 
-Terminal : ):value = )%class = Punctuator / CB%line  = 9
-Terminal : {:value = {%class = Punctuator / OCB%line  = 9
-Non-Terminal : Super:value = }%class = Punctuator / CCB%line  = 9
 Back-Track : 
 Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 9
+Back-Track : 
 Back-Track : 
 Terminal : }:value = }%class = Punctuator / CCB%line  = 9
 Back-Track : 
 Back-Track : 
-Non-Terminal : Class_Body:value = }%class = Punctuator / CCB%line  = 10
 Back-Track : 
 Back-Track : 
+Non-Terminal : Class_Body:value = a%class = Identifier%line  = 11
+Terminal : ID => a:value = a%class = Identifier%line  = 11
+Non-Terminal : Ter13:value = (%class = Punctuator / OB%line  = 11
+Non-Terminal : Cntr:value = (%class = Punctuator / OB%line  = 11
+Terminal : (:value = (%class = Punctuator / OB%line  = 11
+Non-Terminal : Input_Par:value = int%class = Keyword / DT%line  = 11
+Terminal : int:value = int%class = Keyword / DT%line  = 11
+Non-Terminal : Ter19:value = a%class = Identifier%line  = 11
+Terminal : ID => a:value = a%class = Identifier%line  = 11
+Non-Terminal : Rpt:value = ,%class = Punctuator / Comma%line  = 11
+Terminal : ,:value = ,%class = Punctuator / Comma%line  = 11
+Non-Terminal : Input_Par2:value = int%class = Keyword / DT%line  = 11
+Terminal : int:value = int%class = Keyword / DT%line  = 11
+Non-Terminal : Ter19:value = ab%class = Identifier%line  = 11
+Terminal : ID => ab:value = ab%class = Identifier%line  = 11
+Non-Terminal : Rpt:value = )%class = Punctuator / CB%line  = 11
 Back-Track : 
 Back-Track : 
 Back-Track : 
 Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 10
 Back-Track : 
 Back-Track : 
+Terminal : ):value = )%class = Punctuator / CB%line  = 11
+Terminal : {:value = {%class = Punctuator / OCB%line  = 11
+Non-Terminal : Super:value = int%class = Keyword / DT%line  = 12
 Back-Track : 
-Non-Terminal : Start_Global:value = class%class = Keyword / class%line  = 13
-Non-Terminal : SST1:value = class%class = Keyword / class%line  = 13
-Non-Terminal : Combine1:value = class%class = Keyword / class%line  = 13
-Non-Terminal : Class_Def:value = class%class = Keyword / class%line  = 13
-Terminal : class:value = class%class = Keyword / class%line  = 13
-Terminal : ID => b:value = b%class = Identifier%line  = 13
-Terminal : {:value = {%class = Punctuator / OCB%line  = 13
-Non-Terminal : Class_Body:value = }%class = Punctuator / CCB%line  = 15
+Non-Terminal : MST:value = int%class = Keyword / DT%line  = 12
+Non-Terminal : SST:value = int%class = Keyword / DT%line  = 12
+Non-Terminal : Combine:value = int%class = Keyword / DT%line  = 12
+Terminal : int:value = int%class = Keyword / DT%line  = 12
+Non-Terminal : Ter5:value = a%class = Identifier%line  = 12
+Terminal : ID => a:value = a%class = Identifier%line  = 12
+Non-Terminal : Dec:value = ;%class = Punctuator / Semicolon%line  = 12
+Non-Terminal : List:value = ;%class = Punctuator / Semicolon%line  = 12
+Terminal : ;:value = ;%class = Punctuator / Semicolon%line  = 12
 Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 15
 Back-Track : 
 Back-Track : 
 Back-Track : 
-Non-Terminal : Start_Global:value = group%class = Keyword / interface%line  = 17
-Non-Terminal : SST1:value = group%class = Keyword / interface%line  = 17
-Non-Terminal : Combine1:value = group%class = Keyword / interface%line  = 17
-Non-Terminal : Int_Def:value = group%class = Keyword / interface%line  = 17
-Terminal : group:value = group%class = Keyword / interface%line  = 17
-Terminal : ID => g:value = g%class = Identifier%line  = 17
-Non-Terminal : Inherit:value = {%class = Punctuator / OCB%line  = 17
 Back-Track : 
-Terminal : {:value = {%class = Punctuator / OCB%line  = 17
-Non-Terminal : Int_Body:value = }%class = Punctuator / CCB%line  = 17
+Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 13
 Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 17
 Back-Track : 
+Terminal : }:value = }%class = Punctuator / CCB%line  = 13
 Back-Track : 
 Back-Track : 
-Non-Terminal : Start_Global:value = class%class = Keyword / class%line  = 20
-Non-Terminal : SST1:value = class%class = Keyword / class%line  = 20
-Non-Terminal : Combine1:value = class%class = Keyword / class%line  = 20
-Non-Terminal : Class_Def:value = class%class = Keyword / class%line  = 20
-Terminal : class:value = class%class = Keyword / class%line  = 20
-Terminal : ID => aa:value = aa%class = Identifier%line  = 20
-Non-Terminal : Ter:value = @%class = Keyword / extends%line  = 20
-Terminal : @:value = @%class = Keyword / extends%line  = 20
-Terminal : ID => b:value = b%class = Identifier%line  = 20
-Non-Terminal : Ter11:value = applies%class = Keyword / implements%line  = 20
-Terminal : applies:value = applies%class = Keyword / implements%line  = 20
-Non-Terminal : IDS:value = g%class = Identifier%line  = 20
-Terminal : ID => g:value = g%class = Identifier%line  = 20
+Non-Terminal : Class_Body:value = }%class = Punctuator / CCB%line  = 14
 Back-Track : 
 Back-Track : 
 Back-Track : 
-Terminal : {:value = {%class = Punctuator / OCB%line  = 20
-Non-Terminal : Class_Body:value = int%class = Keyword / DT%line  = 21
-Terminal : int:value = int%class = Keyword / DT%line  = 21
-Non-Terminal : Ter14:value = ab%class = Identifier%line  = 21
-Terminal : ID => ab:value = ab%class = Identifier%line  = 21
-Non-Terminal : Ter16:value = ;%class = Punctuator / Semicolon%line  = 21
-Non-Terminal : Dec:value = ;%class = Punctuator / Semicolon%line  = 21
-Non-Terminal : List:value = ;%class = Punctuator / Semicolon%line  = 21
-Terminal : ;:value = ;%class = Punctuator / Semicolon%line  = 21
 Back-Track : 
 Back-Track : 
 Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = personal%class = Keyword / AM%line  = 22
-Terminal : personal:value = personal%class = Keyword / AM%line  = 22
-Non-Terminal : Ter12:value = id%class = Identifier%line  = 22
-Terminal : ID => id:value = id%class = Identifier%line  = 22
-Non-Terminal : Ter121:value = c%class = Identifier%line  = 22
-Terminal : ID => c:value = c%class = Identifier%line  = 22
-Non-Terminal : Tr7:value = =%class = Operator / Assignment%line  = 22
-Non-Terminal : Dec:value = =%class = Operator / Assignment%line  = 22
-Non-Terminal : Init:value = =%class = Operator / Assignment%line  = 22
-Terminal : =:value = =%class = Operator / Assignment%line  = 22
-Non-Terminal : Exp:value = 9%class = Constant / Integer%line  = 22
-Non-Terminal : AE:value = 9%class = Constant / Integer%line  = 22
-Non-Terminal : RE:value = 9%class = Constant / Integer%line  = 22
-Non-Terminal : P:value = 9%class = Constant / Integer%line  = 22
-Non-Terminal : T:value = 9%class = Constant / Integer%line  = 22
-Non-Terminal : F:value = 9%class = Constant / Integer%line  = 22
-Terminal : 9:value = 9%class = Constant / Integer%line  = 22
-Back-Track : 
-Non-Terminal : T1:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Non-Terminal : P1:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Non-Terminal : RE1:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Non-Terminal : AE1:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Non-Terminal : Exp1:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Non-Terminal : List:value = ;%class = Punctuator / Semicolon%line  = 22
-Terminal : ;:value = ;%class = Punctuator / Semicolon%line  = 22
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = personal%class = Keyword / AM%line  = 24
-Terminal : personal:value = personal%class = Keyword / AM%line  = 24
-Non-Terminal : Ter12:value = int%class = Keyword / DT%line  = 24
-Terminal : int:value = int%class = Keyword / DT%line  = 24
-Non-Terminal : Ter17:value = ba%class = Identifier%line  = 24
-Terminal : ID => ba:value = ba%class = Identifier%line  = 24
-Non-Terminal : Ter16:value = (%class = Punctuator / OB%line  = 24
-Non-Terminal : Cntr:value = (%class = Punctuator / OB%line  = 24
-Terminal : (:value = (%class = Punctuator / OB%line  = 24
-Non-Terminal : Input_Par:value = int%class = Keyword / DT%line  = 24
-Terminal : int:value = int%class = Keyword / DT%line  = 24
-Non-Terminal : Ter19:value = a%class = Identifier%line  = 24
-Terminal : ID => a:value = a%class = Identifier%line  = 24
-Non-Terminal : Rpt:value = )%class = Punctuator / CB%line  = 24
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Terminal : ):value = )%class = Punctuator / CB%line  = 24
-Terminal : {:value = {%class = Punctuator / OCB%line  = 24
-Non-Terminal : Super:value = }%class = Punctuator / CCB%line  = 24
-Back-Track : 
-Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 24
-Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 24
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = general%class = Keyword / AM%line  = 26
-Terminal : general:value = general%class = Keyword / AM%line  = 26
-Non-Terminal : Ter12:value = int%class = Keyword / DT%line  = 26
-Terminal : int:value = int%class = Keyword / DT%line  = 26
-Non-Terminal : Ter17:value = ba%class = Identifier%line  = 26
-Terminal : ID => ba:value = ba%class = Identifier%line  = 26
-Non-Terminal : Ter16:value = (%class = Punctuator / OB%line  = 26
-Non-Terminal : Cntr:value = (%class = Punctuator / OB%line  = 26
-Terminal : (:value = (%class = Punctuator / OB%line  = 26
-Non-Terminal : Input_Par:value = int%class = Keyword / DT%line  = 26
-Terminal : int:value = int%class = Keyword / DT%line  = 26
-Non-Terminal : Ter19:value = [%class = Punctuator / OSB%line  = 26
-Terminal : [:value = [%class = Punctuator / OSB%line  = 26
-Non-Terminal : Comma:value = ,%class = Punctuator / Comma%line  = 26
-Terminal : ,:value = ,%class = Punctuator / Comma%line  = 26
-Back-Track : 
-Terminal : ]:value = ]%class = Punctuator / CSB%line  = 26
-Terminal : ID => a:value = a%class = Identifier%line  = 26
-Non-Terminal : Rpt:value = )%class = Punctuator / CB%line  = 26
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Terminal : ):value = )%class = Punctuator / CB%line  = 26
-Terminal : {:value = {%class = Punctuator / OCB%line  = 26
-Non-Terminal : Super:value = }%class = Punctuator / CCB%line  = 26
-Back-Track : 
-Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 26
-Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 26
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = aa%class = Identifier%line  = 28
-Terminal : ID => aa:value = aa%class = Identifier%line  = 28
-Non-Terminal : Ter13:value = (%class = Punctuator / OB%line  = 28
-Non-Terminal : Cntr:value = (%class = Punctuator / OB%line  = 28
-Terminal : (:value = (%class = Punctuator / OB%line  = 28
-Non-Terminal : Input_Par:value = int%class = Keyword / DT%line  = 28
-Terminal : int:value = int%class = Keyword / DT%line  = 28
-Non-Terminal : Ter19:value = a%class = Identifier%line  = 28
-Terminal : ID => a:value = a%class = Identifier%line  = 28
-Non-Terminal : Rpt:value = ,%class = Punctuator / Comma%line  = 28
-Terminal : ,:value = ,%class = Punctuator / Comma%line  = 28
-Non-Terminal : Input_Par2:value = int%class = Keyword / DT%line  = 28
-Terminal : int:value = int%class = Keyword / DT%line  = 28
-Non-Terminal : Ter19:value = b%class = Identifier%line  = 28
-Terminal : ID => b:value = b%class = Identifier%line  = 28
-Non-Terminal : Rpt:value = )%class = Punctuator / CB%line  = 28
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Terminal : ):value = )%class = Punctuator / CB%line  = 28
-Terminal : {:value = {%class = Punctuator / OCB%line  = 28
-Non-Terminal : Super:value = }%class = Punctuator / CCB%line  = 28
-Back-Track : 
-Non-Terminal : MST:value = }%class = Punctuator / CCB%line  = 28
-Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 28
-Back-Track : 
-Back-Track : 
-Non-Terminal : Class_Body:value = }%class = Punctuator / CCB%line  = 29
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Back-Track : 
-Terminal : }:value = }%class = Punctuator / CCB%line  = 29
+Terminal : }:value = }%class = Punctuator / CCB%line  = 14
 Back-Track : 
 Back-Track : 
 Back-Track : 

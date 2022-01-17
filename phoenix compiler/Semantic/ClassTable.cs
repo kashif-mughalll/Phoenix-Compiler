@@ -17,7 +17,8 @@ namespace phoenix_compiler.Semantic
 
         public void AddEntry(ClassTableEntry entry)
         {
-            Entries.Add(entry);
+            if (!entry.Name.Equals(""))
+                Entries.Add(entry);
         }
 
         public bool CheckEntryExistsByName(string Name,string TypeExp = null)

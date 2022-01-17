@@ -18,7 +18,8 @@ namespace phoenix_compiler.Semantic
 
         public static void AddEntry(MainTableEntry entry)
         {
-            Entries.Add(entry);
+            if (!entry.Name.Equals(""))
+                Entries.Add(entry);
         }
 
         public static bool CheckEntryExistsByName(string Name)
