@@ -16,14 +16,14 @@ namespace phoenix_compiler.Semantic
         public ClassTable classTable;
         public string AM;
 
-        public MainTableEntry(string Name,string Type, bool Abstract, string AM,string Parent, List<string> InterfaceList)
+        public MainTableEntry(string Name,string Type, bool Abstract, string AM,string Parent, List<string> InterfaceList, ClassTable classTable)
         {
             this.Name = Name;
             this.Type = Type;
             this.Abstract = Abstract;
             this.Parent = Parent;
             this.InterfaceList = InterfaceList;
-            classTable = new ClassTable();
+            this.classTable = classTable;
             this.AM = AM;
         }
 

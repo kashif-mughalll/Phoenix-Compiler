@@ -50,7 +50,7 @@ namespace phoenix_compiler.Semantic
 
         public InterfaceExpectedError(string Name)
         {
-            this.Message = "Excepted an interface, entity  ' "+Name+" '  is not an interface";
+            this.Message = "Excepted an interface, entity  ' " + Name + " '  is not an interface";
         }
     }
     

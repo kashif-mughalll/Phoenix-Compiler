@@ -21,13 +21,26 @@ namespace phoenix_compiler.Compiler_Classes
         private static CallLogger log;
         private static List<Token> tokenList;
         private static int i = 0;
+        private static int currentScopeID;
+        private static int currentLevel;
+        private static bool isGlobalScope;
+        private static bool InsideClassBody;
+        private static ClassTable cTable;
+        private static string currentClassName;
+
 
         public static bool Start(List<Token> _tokenList, CallLogger _log)
         {
             tokenList = _tokenList;
             i = 0;
+            currentScopeID = 0;
+            currentLevel = -1;
             log = _log;
             log.setDisableTracking(true);
+            IDsList = new List<string>();
+            isGlobalScope = true;
+            InsideClassBody = false;
+            cTable = null;
             return start();
         }
 
@@ -309,7 +322,7 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_ID())
             {
-                if (Dec()) return ReturnTrue();
+                if (Dec(null, null, null)) return ReturnTrue();
             }
             else if (Ops1())
             {
@@ -331,7 +344,7 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_ID())
             {
-                if (Ter7()) return ReturnTrue();
+                if (Ter7(null, null, null)) return ReturnTrue();
             }
             else if (Ops1())
             {
@@ -348,7 +361,8 @@ namespace phoenix_compiler.Compiler_Classes
         {
             log.AddLog("Ter2", getToken());
 
-            if (Comma())
+            string coma = "";
+            if (Comma(out coma))
             {
                 if (TokenIs("]"))
                 {
@@ -376,11 +390,12 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs_ID())
             {
-                if (Dec()) return ReturnTrue();
+                if (Dec(null, null, null)) return ReturnTrue();
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
@@ -402,11 +417,12 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs_ID())
             {
-                if (Ter7()) return ReturnTrue();
+                if (Ter7(null, null, null)) return ReturnTrue();
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
@@ -422,15 +438,15 @@ namespace phoenix_compiler.Compiler_Classes
         }
 
 
-        private static bool Ter7()
+        private static bool Ter7(string AM, string DT, string Name)
         {
             log.AddLog("Tr7", getToken());
 
-            if (Dec())
+            if (Dec(AM, DT, Name))
             {
                 return ReturnTrue();
             }
-            else if (Fn_Def()) return ReturnTrue();
+            else if (Cntr(AM, DT, Name)) return ReturnTrue();    // fn_def changed to cntr()
 
             return ReturnFalse("Ter7");
         }
@@ -487,7 +503,8 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]")) return ReturnTrue();
                 }
@@ -498,12 +515,16 @@ namespace phoenix_compiler.Compiler_Classes
         }
 
 
-        private static bool Comma()
+        private static bool Comma(out string coma)
         {
+            coma = "";
             log.AddLog("Comma", getToken());
 
             if (TokenIs(","))
+            {
+                coma = ",";
                 return ReturnTrue();
+            }
             else return ReturnTrue();
         }
 
@@ -676,6 +697,7 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Ops2");
         }
 
+        
 
         private static bool Input_Par()
         {
@@ -683,13 +705,14 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (SelectionSets.Check_Input_Par_SelectionSet(getToken().Value))
             {
+                string IDorDT = getToken().Value;
                 if (TokenIs_ID())
                 {
-                    if (Ter19()) return ReturnTrue();
+                    if (Ter19(IDorDT)) return ReturnTrue();
                 }
                 else if (TokenIs_DT())
                 {
-                    if (Ter19()) return ReturnTrue();
+                    if (Ter19(IDorDT)) return ReturnTrue();
                 }
             }
             else return ReturnTrue();
@@ -697,22 +720,39 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Input_Par");
         }
 
-        private static bool Ter19()
+        private static bool Ter19(string DT)
         {
             log.AddLog("Ter19", getToken());
 
             if (TokenIs_ID())
             {
+                string Name = tokenList[i - 1].Value;
+                FunctionTableEntry entry = ScopeUtility.CheckEntityExist(Name, currentScopeID, currentLevel);
+                if (entry == null) FunctionTable.AddEntry(new FunctionTableEntry(Name, null, DT, currentScopeID, currentLevel));
+                else throw new ReDeclarationError(Name, DT);
+                IDsList.Add(DT);
+
                 if (Rpt())
                     return ReturnTrue();
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                     if (TokenIs("]"))
+                    {
+                        DT += "[" + coma + "]";
                         if (TokenIs_ID())
-                            if (Rpt())
-                                return ReturnTrue();
+                        {
+                            string Name = tokenList[i - 1].Value;
+                            FunctionTableEntry entry = ScopeUtility.CheckEntityExist(Name, currentScopeID, currentLevel);
+                            if (entry == null) FunctionTable.AddEntry(new FunctionTableEntry(Name, null, DT, currentScopeID, currentLevel));
+                            else throw new ReDeclarationError(Name, DT);
+                            IDsList.Add(DT);
+
+                            if (Rpt()) return ReturnTrue();
+                        }
+                    }
             }
 
             return ReturnFalse("Ter19");
@@ -1134,7 +1174,8 @@ namespace phoenix_compiler.Compiler_Classes
         {
             log.AddLog("Ter211", getToken());
 
-            if (Comma())
+            string coma = "";
+            if (Comma(out coma))
             {
                 if (TokenIs("]"))
                     if (TokenIs_ID())
@@ -1229,7 +1270,7 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("IDS1");
         }
 
-        private static bool Dec()
+        private static bool Dec(string AM ,string DT,string Name)
         {
             if (Utility.EnableSS && !SelectionSets.Check_Dec_Selection_Set(getToken())) return false;
 
@@ -1237,7 +1278,7 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (Init())
             {
-                if (List()) return ReturnTrue();
+                if (List(AM,DT,Name)) return ReturnTrue();
             }
 
             return ReturnFalse("Dec");
@@ -1262,21 +1303,30 @@ namespace phoenix_compiler.Compiler_Classes
         }
 
 
-        private static bool List()
+        private static bool List(string AM, string DT, string Name)
         {
             log.AddLog("List", getToken());
 
             if (TokenIs(";"))
             {
+                if (InsideClassBody)
+                {
+                    if (currentClassName == Name) throw new GeneralSemanticError("class with name  ' "+ currentClassName+" '  already exists can't create attribute with same name.");
+                    if (!cTable.CheckEntryExistsByName(Name)) cTable.AddEntry(new ClassTableEntry(Name, DT, false, AM));
+                    else throw new ReDeclarationError(Name,DT);
+                }
+
                 return ReturnTrue();
             }
             else if (TokenIs(","))
             {
                 if (TokenIs_ID())
                 {
+                    Name = tokenList[i - 1].Value;
+
                     if (Init())
                     {
-                        if (List()) return ReturnTrue();
+                        if (List(AM,DT,Name)) return ReturnTrue();
                     }
                 }
             }
@@ -1370,6 +1420,7 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs("("))
             {
+                IDsList.Clear();
                 if (Input_Par())
                 {
                     if (TokenIs(")"))
@@ -1820,6 +1871,7 @@ namespace phoenix_compiler.Compiler_Classes
                 {
                     Type = "class";
                     Name = getToken().Value;
+                    currentClassName = Name;
 
                     if (TokenIs_ID())
                     {
@@ -1828,17 +1880,29 @@ namespace phoenix_compiler.Compiler_Classes
                         if (Ter(Type,out Parent))
                         {
                             InterfaceList = IDsList;
+                            ClassTable table = new ClassTable();
 
                             if (!MainTable.CheckEntryExistsByName(Name))
-                                MainTable.AddEntry(new MainTableEntry(Name, Type, Abstract, AM, Parent, InterfaceList));
+                                MainTable.AddEntry(new MainTableEntry(Name, Type, Abstract, AM, Parent, InterfaceList,table));
                             else throw new ReDeclarationError(Name, Type);
+
+                            cTable = table;
+                            InsideClassBody = true;
 
                             if (TokenIs("{"))
                             {
+                                currentScopeID = ScopeUtility.generateScopeID();
+                                currentLevel++;
+                                isGlobalScope = false;
+
                                 if (Class_Body())
                                 {
                                     if (TokenIs("}"))
                                     {
+                                        cTable = null;
+                                        InsideClassBody = false;
+                                        isGlobalScope = true;
+                                        reduceScope();
                                         return ReturnTrue();
                                     }
                                 }
@@ -1932,14 +1996,18 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_ID())
             {
-                if (Ter13())
+                string DT = tokenList[i - 1].Value;
+
+                if (Ter13(DT))
                 {
                     if (Class_Body()) return ReturnTrue();
                 }
             }
             else if (TokenIs_DT())
             {
-                if (Ter14())
+                string DT = tokenList[i - 1].Value;
+
+                if (Ter14(DT))
                 {
                     if (Class_Body()) return ReturnTrue();
                 }
@@ -1948,7 +2016,7 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (TokenIs_ID())
                 {
-                    if (Cntr())
+                    if (Cntr(null,"empty",tokenList[i-1].Value))
                     {
                         if (Class_Body()) return ReturnTrue();
                     }
@@ -1967,7 +2035,7 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (Ter23())
                 {
-                    if (Cntr()) return ReturnTrue();
+                    if (Cntr(null, null, null)) return ReturnTrue();
                 }
             }
             else if (TokenIs_DT())
@@ -1976,7 +2044,7 @@ namespace phoenix_compiler.Compiler_Classes
                 {
                     if (TokenIs_ID())
                     {
-                        if (Cntr()) return ReturnTrue();
+                        if (Cntr(null, null, null)) return ReturnTrue();
                     }
                 }
             }
@@ -1984,13 +2052,12 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (TokenIs_ID())
                 {
-                    if (Cntr()) return ReturnTrue();
+                    if (Cntr(null, null, null)) return ReturnTrue();
                 }
             }
 
             return ReturnFalse("Obj_Fn");
         }
-
 
         private static bool Ter23()
         {
@@ -2002,7 +2069,8 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
@@ -2055,14 +2123,18 @@ namespace phoenix_compiler.Compiler_Classes
             }
             else if (TokenIs_DT())
             {
-                if (Ter17())
+                string DT = tokenList[i - 1].Value;
+
+                if (Ter17(AM,DT))
                 {
                     return ReturnTrue();
                 }
             }
             else if (TokenIs_ID())
             {
-                if (Ter121())
+                string DT = tokenList[i - 1].Value;
+
+                if (Ter121(AM,DT))
                 {
                     return ReturnTrue();
                 }
@@ -2071,25 +2143,34 @@ namespace phoenix_compiler.Compiler_Classes
             {
                 if (TokenIs_ID())
                 {
-                    if (Cntr()) return ReturnTrue();
+                    string Name = tokenList[i - 1].Value;
+                    if (Cntr(AM, "empty", Name)) return ReturnTrue();
                 }
             }
 
             return ReturnFalse("Ter12");
         }
 
-        private static bool Ter121()
+        private static bool Ter121(string AM, string DT)
         {
             log.AddLog("Ter121", getToken());
 
-            if (Ter7()) return ReturnTrue();
-            else if (Cntr()) return ReturnTrue();
+            /*if (TokenIs_ID())
+            {
+                string Name = tokenList[i - 1].Value;
+
+                if (Ter7(AM,DT,Name)) return ReturnTrue();
+                else if (Cntr(AM,DT,Name)) return ReturnTrue();
+            }*/
+
+            if (Ter7(AM, null, DT)) return ReturnTrue();
+            else if (Cntr(AM, null, DT)) return ReturnTrue();
 
             return ReturnFalse("Ter121");
         }
 
 
-        private static bool Cntr()
+        private static bool Cntr(string AM, string DT, string Name)
         {
             if (Utility.EnableSS && !getToken().Value.Equals("(")) return false;
 
@@ -2097,10 +2178,23 @@ namespace phoenix_compiler.Compiler_Classes
 
             if (TokenIs("("))
             {
+                currentLevel++;
+                IDsList.Clear();
+
                 if (Input_Par())
                 {
                     if (TokenIs(")"))
                     {
+                        string TypeExp = FunctionTable.generateTypeExp(IDsList, DT);
+                        if (InsideClassBody)
+                        {
+                            if (currentClassName == Name && DT != null) throw new GeneralSemanticError("class with name  ' " + currentClassName + " '  already exists can't create method with same name.");
+                            if(DT == null && currentClassName != Name) throw new GeneralSemanticError("Constructor name should be kept as of class ' " + currentClassName + " '.");
+                            if (!cTable.CheckEntryExistsByName(Name, TypeExp))
+                                cTable.AddEntry(new ClassTableEntry(Name, TypeExp, false, AM));
+                            else throw new ReDeclarationError(Name, TypeExp);
+                        }
+
                         if (TokenIs("{"))
                         {
                             if (Super())
@@ -2109,6 +2203,7 @@ namespace phoenix_compiler.Compiler_Classes
                                 {
                                     if (TokenIs("}"))
                                     {
+                                        reduceScope();
                                         return ReturnTrue();
                                     }
                                 }
@@ -2121,33 +2216,36 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Cntr");
         }
 
-        private static bool Ter13()
+        private static bool Ter13(string DT)
         {
             log.AddLog("Ter13", getToken());
 
             if (TokenIs_ID())
             {
-                if (Ter16())
+                string Name = tokenList[i - 1].Value;
+
+                if (Ter16(null,DT,Name))
                 {
                     return ReturnTrue();
                 }
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
-
                         if (TokenIs_ID())
                         {
-
-                            if (Ter15()) return ReturnTrue();
+                            string Name = tokenList[i - 1].Value;
+                            DT += "[" + coma + "]";
+                            if (Ter15(null,DT,Name)) return ReturnTrue();
                         }
                     }
                 }
             }
-            else if (Cntr())
+            else if (Cntr(null,null,DT))
             {
                 return ReturnTrue();
             }
@@ -2155,27 +2253,31 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Ter13");
         }
 
-        private static bool Ter14()
+        private static bool Ter14(string DT)
         {
             log.AddLog("Ter14", getToken());
 
             if (TokenIs_ID())
             {
+                string Name = tokenList[i - 1].Value;
 
-                if (Ter16())
+                if (Ter16(null,DT,Name))
                 {
                     return ReturnTrue();
                 }
             }
             else if (TokenIs("["))
             {
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
                         if (TokenIs_ID())
                         {
-                            if (Ter15()) return ReturnTrue();
+                            string Name = tokenList[i - 1].Value;
+                            DT += "[" + coma + "]";
+                            if (Ter15(null,DT,Name)) return ReturnTrue();
                         }
                     }
                 }
@@ -2184,11 +2286,11 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Ter14");
         }
 
-        private static bool Ter15()
+        private static bool Ter15(string AM, string DT, string Name)
         {
             log.AddLog("Ter15", getToken());
 
-            if (Cntr())
+            if (Cntr(AM,DT,Name))
             {
                 return ReturnTrue();
             }
@@ -2200,15 +2302,15 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Ter15");
         }
 
-        private static bool Ter16()
+        private static bool Ter16(string AM,string DT,string Name)
         {
             log.AddLog("Ter16", getToken());
 
-            if (Cntr())
+            if (Cntr(AM,DT,Name))
             {
                 return ReturnTrue();
             }
-            else if (Dec())
+            else if (Dec(AM, DT, Name))
             {
                 return ReturnTrue();
             }
@@ -2216,27 +2318,31 @@ namespace phoenix_compiler.Compiler_Classes
             return ReturnFalse("Ter16");
         }
 
-        private static bool Ter17()
+        private static bool Ter17(string AM, string DT)
         {
             log.AddLog("Ter17", getToken());
 
             if (TokenIs_ID())
             {
-                if (Ter16())
+                string Name = tokenList[i - 1].Value;               
+
+                if (Ter16(AM,DT,Name))
                 {
                     return ReturnTrue();
                 }
             }
             else if (TokenIs("["))
             {
-
-                if (Comma())
+                string coma = "";
+                if (Comma(out coma))
                 {
                     if (TokenIs("]"))
                     {
                         if (TokenIs_ID())
                         {
-                            if (Cntr()) return ReturnTrue();
+                            string Name = tokenList[i-1].Value;
+                            DT += "[" + coma + "]";
+                            if (Cntr(AM,DT,Name)) return ReturnTrue();
                         }
                     }
                 }
@@ -2265,16 +2371,23 @@ namespace phoenix_compiler.Compiler_Classes
 
                     if (Inherit())
                     {
+                        cTable = new ClassTable();
+
                         if (!MainTable.CheckEntryExistsByName(Name))
-                            MainTable.AddEntry(new MainTableEntry(Name, Type, false, AM, null, IDsList));
+                            MainTable.AddEntry(new MainTableEntry(Name, Type, false, AM, null, IDsList, cTable));
                         else throw new ReDeclarationError(Name,Type);
 
                         if (TokenIs("{"))
                         {
+                            currentScopeID = ScopeUtility.generateScopeID();
+                            currentLevel = 0;
+                            isGlobalScope = false;
+
                             if (Int_Body())
                             {
                                 if (TokenIs("}"))
                                 {
+                                    isGlobalScope = true;
                                     return ReturnTrue();
                                 }
                             }
@@ -2331,6 +2444,7 @@ namespace phoenix_compiler.Compiler_Classes
                         {
                             if (TokenIs("("))
                             {
+                                IDsList.Clear();
                                 if (Input_Par())
                                 {
                                     if (TokenIs(")"))
@@ -2371,6 +2485,12 @@ namespace phoenix_compiler.Compiler_Classes
             log.StopSerialFile();
             if (Utility.ThrowSyntaxError) throw new SyntaxError(getToken().LineNumber, getToken(), name);
             return false;
+        }
+
+        private static void reduceScope()
+        {
+            FunctionTable.RemoveEntries(currentLevel);
+            currentLevel--;
         }
 
         private static bool ReturnTrue(string name = "")

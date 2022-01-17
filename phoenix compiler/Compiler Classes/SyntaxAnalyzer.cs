@@ -423,7 +423,7 @@ namespace phoenix_compiler
             {
                 return ReturnTrue();
             }
-            else if (Fn_Def()) return ReturnTrue();
+            else if (Cntr()) return ReturnTrue();
 
             return ReturnFalse("Ter7");
         }
@@ -674,6 +674,24 @@ namespace phoenix_compiler
             return ReturnFalse("Input_Par");
         }
 
+
+        private static bool Input_Par2()
+        {
+            log.AddLog("Input_Par2", getToken());
+
+            if (TokenIs_ID())
+            {
+                if (Ter19()) return ReturnTrue();
+            }
+            else if (TokenIs_DT())
+            {
+                if (Ter19()) return ReturnTrue();
+            }
+
+            return ReturnFalse("Input_Par2");
+        }
+
+
         private static bool Ter19()
         {
             log.AddLog("Ter19", getToken());
@@ -701,7 +719,7 @@ namespace phoenix_compiler
 
             if (TokenIs(","))
             {
-                if (Input_Par()) return ReturnTrue();
+                if (Input_Par2()) return ReturnTrue();
             }
             else return ReturnTrue();
 

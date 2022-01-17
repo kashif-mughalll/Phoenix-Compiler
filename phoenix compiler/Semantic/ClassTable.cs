@@ -20,9 +20,13 @@ namespace phoenix_compiler.Semantic
             Entries.Add(entry);
         }
 
-        public bool CheckEntryExistsByName(string Name)
+        public bool CheckEntryExistsByName(string Name,string TypeExp = null)
         {
-            foreach (ClassTableEntry entry in Entries) if (entry.Name.Equals(Name)) return true;
+            foreach (ClassTableEntry entry in Entries)
+                if (entry.Name.Equals(Name))
+                    if (!entry.IsMethod()) return true;
+                    else if (TypeExp.Equals(entry.Type)) return true;
+
             return false;
         }
 
